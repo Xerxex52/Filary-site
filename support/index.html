@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support — Filary</title>
+    <link rel="icon" type="image/webp" href="../assets/app-icon.webp">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #555555;
+            --accent: #00a884;
+            --border: #e5e5e5;
+            --radius: 12px;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1115;
+                --text: #f5f7fa;
+                --text-secondary: #a7adb8;
+                --accent: #00d4aa;
+                --border: rgba(255, 255, 255, 0.08);
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 48px 20px;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        header img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        a { color: var(--accent); }
+        .back {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="../">← Back to Filary</a>
+
+        <header>
+            <img src="../assets/app-icon.webp" alt="Filary app icon">
+            <h1>Support</h1>
+            <p>Filary — 3D Filament Inventory</p>
+        </header>
+
+        <h2>Contact</h2>
+        <p>For questions, feedback or issues, please email us at:</p>
+        <p><strong><a href="mailto:sramezani52@gmail.com">sramezani52@gmail.com</a></strong></p>
+
+        <h2>Common topics</h2>
+        <p><strong>Restore purchases:</strong> Open Filary, go to Settings and tap "Restore Purchases". Make sure you are signed in with the same Apple ID used for the original purchase.</p>
+        <p><strong>iCloud sync:</strong> Enable iCloud Sync in Settings and restart the app. Both devices must use the same Apple ID and be connected to the internet.</p>
+        <p><strong>Export/import:</strong> Export your inventory from the Inventory screen (table view) or from Settings. Import a JSON backup from Settings > Import inventory JSON.</p>
+        <p><strong>Barcode scan:</strong> Barcode scanning is part of Filary Pro. The free version supports up to 10 spools with manual and voice entry.</p>
+
+        <h2>Privacy</h2>
+        <p>Read our <a href="../privacy/">Privacy Policy</a>.</p>
+
+        <footer>
+            <p>© 2026 Filary · <a href="mailto:sramezani52@gmail.com">sramezani52@gmail.com</a></p>
+        </footer>
+    </div>
+</body>
+</html>

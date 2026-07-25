@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1411">
+  <meta name="description" content="Filary keeps your 3D filament inventory organized on iPhone and iPad.">
+  <title>Filary — 3D Filament Inventory</title>
+  <link rel="icon" type="image/webp" href="assets/app-icon.webp">
+  <style>
+    :root {
+      --ink: #f7fbf8;
+      --muted: #a9b8b0;
+      --muted-strong: #cbd7d0;
+      --bg: #07100d;
+      --bg-2: #0b1712;
+      --panel: #102019;
+      --panel-2: #152920;
+      --line: rgba(255,255,255,.10);
+      --green: #62e79e;
+      --green-strong: #26cf78;
+      --green-soft: rgba(98,231,158,.12);
+      --shadow: 0 28px 80px rgba(0,0,0,.38);
+      --radius: 28px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    button, select, a { font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .section { padding: 104px 0; }
+    .section-alt { background: var(--bg-2); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: rgba(7,16,13,.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 760; letter-spacing: -.02em; }
+    .brand img { width: 42px; height: 42px; border-radius: 11px; box-shadow: 0 8px 24px rgba(38,207,120,.18); }
+    .brand span { font-size: 1.16rem; }
+    .language {
+      min-height: 42px;
+      padding: 0 38px 0 14px;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 88px 0 96px;
+      background:
+        linear-gradient(90deg, rgba(7,16,13,.96) 0%, rgba(7,16,13,.72) 52%, rgba(7,16,13,.90) 100%),
+        url("assets/campaign-background.webp") center / cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: auto -15% -55% 30%;
+      height: 540px;
+      background: radial-gradient(circle, rgba(38,207,120,.24), transparent 66%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(280px,.68fr); align-items: center; gap: clamp(48px,8vw,110px); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 8px 13px;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid rgba(98,231,158,.24);
+      border-radius: 999px;
+      font-size: .84rem;
+      font-weight: 720;
+      letter-spacing: .015em;
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 16px var(--green); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 760px;
+      margin-bottom: 24px;
+      font-size: clamp(3.4rem, 6.4vw, 5.15rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+    h1 span { color: var(--green); }
+    .lead { max-width: 650px; margin-bottom: 34px; color: var(--muted-strong); font-size: clamp(1.08rem,1.8vw,1.27rem); line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 720;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #04120a; background: var(--green); box-shadow: 0 12px 34px rgba(38,207,120,.24); }
+    .button-secondary { color: var(--ink); background: rgba(255,255,255,.06); border-color: var(--line); }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 30px 0 0; padding: 0; color: var(--muted); list-style: none; font-size: .92rem; }
+    .hero-trust li::before { content: "✓"; color: var(--green); font-weight: 800; margin-right: 7px; }
+    .hero-device { justify-self: center; position: relative; }
+    .hero-device::before { content: ""; position: absolute; inset: 10% -12% 4%; z-index: -1; border-radius: 50%; background: rgba(38,207,120,.16); filter: blur(40px); }
+    .phone-shot {
+      width: min(100%, 330px);
+      height: auto;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 42px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro { max-width: 720px; margin-bottom: 50px; }
+    .kicker { margin-bottom: 12px; color: var(--green); font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin-bottom: 18px; font-size: clamp(2.25rem,4.5vw,3.65rem); line-height: 1.05; letter-spacing: -.045em; text-wrap: balance; }
+    .intro > p:last-child { margin-bottom: 0; color: var(--muted); font-size: 1.08rem; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+    .feature-card { min-height: 260px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(150deg,var(--panel-2),var(--panel)); }
+    .feature-mark { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 42px; color: var(--green); border-radius: 15px; background: var(--green-soft); font-size: 1.35rem; font-weight: 800; }
+    .feature-card h3 { margin-bottom: 10px; font-size: 1.3rem; line-height: 1.2; letter-spacing: -.02em; }
+    .feature-card p { margin-bottom: 0; color: var(--muted); }
+
+    .cap-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .cap-item { display: flex; gap: 15px; align-items: flex-start; padding: 22px 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); }
+    .cap-mark { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; color: var(--green); border-radius: 13px; background: var(--green-soft); font-size: 1.2rem; font-weight: 800; }
+    .cap-item h3 { margin-bottom: 5px; font-size: 1.1rem; line-height: 1.2; letter-spacing: -.01em; }
+    .cap-item p { margin-bottom: 0; color: var(--muted); font-size: .97rem; line-height: 1.46; }
+
+    .spotlight { display: grid; grid-template-columns: minmax(0,1fr) minmax(240px,390px); align-items: center; gap: clamp(42px,8vw,100px); }
+    .spotlight-copy { max-width: 650px; }
+    .spotlight-copy > p:not(.kicker) { color: var(--muted-strong); font-size: 1.08rem; }
+    .clean-list { display: grid; gap: 13px; margin: 28px 0 0; padding: 0; list-style: none; }
+    .clean-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--muted-strong); }
+    .clean-list li::before { content: "✓"; flex: 0 0 24px; width: 24px; height: 24px; display: grid; place-items: center; color: #06130c; background: var(--green); border-radius: 50%; font-size: .76rem; font-weight: 900; }
+    .scan-shot { width: min(100%,320px); justify-self: center; border-radius: 38px; border: 1px solid rgba(255,255,255,.15); box-shadow: var(--shadow); }
+
+    .device-grid { display: grid; grid-template-columns: minmax(250px,.62fr) minmax(0,1.38fr); gap: 24px; align-items: start; }
+    .device-card { display: flex; flex-direction: column; justify-content: flex-start; gap: 30px; padding: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .device-card h3 { margin-bottom: 8px; font-size: 1.25rem; }
+    .device-card p { margin-bottom: 0; color: var(--muted); }
+    .device-card .iphone { width: min(76%,280px); height: auto; align-self: center; object-fit: contain; border-radius: 32px; }
+    .device-card .ipad { width: 100%; height: auto; align-self: center; object-fit: contain; border-radius: 22px; }
+
+    .steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; counter-reset: steps; }
+    .step { position: relative; padding: 30px; border-top: 1px solid rgba(98,231,158,.42); background: linear-gradient(180deg,rgba(98,231,158,.07),transparent 55%); }
+    .step::before { counter-increment: steps; content: "0" counter(steps); display: block; margin-bottom: 46px; color: var(--green); font-size: .84rem; font-weight: 850; letter-spacing: .1em; }
+    .step h3 { margin-bottom: 10px; font-size: 1.28rem; }
+    .step p { margin-bottom: 0; color: var(--muted); }
+
+    .privacy { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(36px,8vw,100px); align-items: start; padding: 42px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(135deg,rgba(98,231,158,.11),rgba(255,255,255,.025)); }
+    .privacy h2 { margin-bottom: 0; font-size: clamp(2rem,4vw,3.1rem); }
+    .privacy p { margin-bottom: 20px; color: var(--muted-strong); font-size: 1.06rem; }
+    .privacy-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .privacy-tags span { padding: 8px 12px; color: var(--green); background: var(--green-soft); border-radius: 999px; font-size: .88rem; font-weight: 700; }
+
+    .closing { text-align: center; }
+    .closing-inner { max-width: 780px; margin: 0 auto; }
+    .closing .actions { justify-content: center; margin-top: 30px; }
+    .closing p:not(.kicker) { color: var(--muted-strong); font-size: 1.08rem; }
+    footer { padding: 34px 0; color: var(--muted); border-top: 1px solid var(--line); font-size: .9rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; }
+    footer a { color: var(--green); text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .section { padding: 84px 0; }
+      .hero { padding: 76px 0 84px; }
+      .hero-grid { grid-template-columns: minmax(0,1fr) minmax(240px,.58fr); gap: 42px; }
+      h1 { font-size: clamp(3rem,7vw,4rem); }
+      .feature-grid, .steps { gap: 14px; }
+      .cap-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+      .feature-card, .step { padding: 24px; }
+      .feature-mark { margin-bottom: 30px; }
+      .privacy { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    @media (max-width: 760px) {
+      body { font-size: 16px; }
+      .shell { width: min(calc(100% - 36px), var(--max)); }
+      .nav { min-height: 64px; }
+      .brand img { width: 36px; height: 36px; border-radius: 9px; }
+      .brand span { font-size: 1.02rem; }
+      .language { min-height: 40px; max-width: 116px; padding-left: 12px; }
+      .hero { padding: 58px 0 68px; background-position: 58% center; }
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .hero-copy { min-width: 0; }
+      .eyebrow { margin-bottom: 20px; }
+      h1 { margin-inline: auto; margin-bottom: 20px; font-size: clamp(2.45rem,11vw,3.1rem); line-height: 1.01; }
+      .lead { margin-inline: auto; margin-bottom: 28px; font-size: 1.06rem; line-height: 1.5; }
+      .actions { justify-content: center; }
+      .button { min-height: 48px; padding-inline: 20px; }
+      .hero-trust { justify-content: center; gap: 8px 16px; margin-top: 26px; font-size: .86rem; }
+      .hero-device { width: 100%; }
+      .phone-shot { width: min(68vw,270px); border-radius: 34px; }
+      .section { padding: 72px 0; }
+      .intro { margin-bottom: 36px; }
+      h2 { margin-bottom: 15px; font-size: clamp(2rem,9vw,2.65rem); line-height: 1.07; }
+      .intro > p:last-child, .spotlight-copy > p:not(.kicker), .closing p:not(.kicker) { font-size: 1rem; }
+      .feature-grid, .steps, .spotlight, .device-grid, .cap-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: 0; padding: 26px; }
+      .feature-mark { margin-bottom: 24px; }
+      .spotlight { gap: 42px; }
+      .spotlight-copy { text-align: left; }
+      .scan-shot { width: min(64vw,260px); border-radius: 32px; }
+      .device-card { padding: 22px; }
+      .device-card .iphone { width: min(62vw,250px); }
+      .device-card .ipad { border-radius: 14px; }
+      .step { padding: 26px 22px; }
+      .step::before { margin-bottom: 26px; }
+      .privacy { padding: 28px 24px; }
+      .privacy h2 { font-size: 2.15rem; }
+      .footer-row { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 420px) {
+      .shell { width: min(calc(100% - 30px), var(--max)); }
+      .brand span { max-width: 108px; white-space: nowrap; }
+      .actions { flex-direction: column; }
+      .button { width: 100%; }
+      .hero-trust { flex-direction: column; align-items: center; }
+      .feature-card h3, .step h3 { font-size: 1.22rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Filary home">
+        <img src="assets/app-icon.webp" alt="" width="42" height="42">
+        <span>Filary</span>
+      </a>
+      <label>
+        <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Language</span>
+        <select class="language" id="language" aria-label="Language">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="heroKicker">Filament inventory for iPhone &amp; iPad</p>
+          <h1 data-i18n="heroTitle">Know exactly what <span>filament you have.</span></h1>
+          <p class="lead" data-i18n="heroBody">Track every spool by brand, material, color and remaining weight. Find the right filament before your next print.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#showcase" data-i18n="heroPrimary">See it in action</a>
+            <a class="button button-secondary" href="#features" data-i18n="heroSecondary">Explore features</a>
+          </div>
+          <ul class="hero-trust">
+            <li data-i18n="trust1">Fast filtering</li>
+            <li data-i18n="trust2">Barcode scanning</li>
+            <li data-i18n="trust3">Optional iCloud sync</li>
+          </ul>
+        </div>
+        <div class="hero-device">
+          <img class="phone-shot" src="assets/iphone-01.png" alt="Filary inventory dashboard on iPhone" width="660" height="1434" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="intro">
+          <p class="kicker" data-i18n="essentialsKicker">The essentials</p>
+          <h2 data-i18n="essentialsTitle">Less searching. More printing.</h2>
+          <p data-i18n="essentialsBody">Everything important is close at hand, without turning inventory into a chore.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-mark" aria-hidden="true">⌕</div>
+            <h3 data-i18n="feature1Title">Find the right spool</h3>
+            <p data-i18n="feature1Body">Search and filter by brand, material, color, status or remaining weight.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-mark" aria-hidden="true">▥</div>
+            <h3 data-i18n="feature2Title">Scan instead of typing</h3>
+            <p data-i18n="feature2Body">Known barcodes prefill saved details. Review and save a new barcode once, and Filary learns it for next time.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-mark" aria-hidden="true">%</div>
+            <h3 data-i18n="feature3Title">Know what remains</h3>
+            <p data-i18n="feature3Body">Record current weight and see how much filament is still available.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="shell spotlight">
+        <div class="spotlight-copy">
+          <p class="kicker" data-i18n="scanKicker">Filary Pro</p>
+          <h2 data-i18n="scanTitle">Scan the label. Skip the typing.</h2>
+          <p data-i18n="scanBody">Point your camera at a spool label. If the barcode is already in your catalog, Filary prefills the saved brand, material, color and weight. If it is new, review or complete the details once and save the spool; Filary then learns the barcode and recognizes it automatically the next time.</p>
+          <ul class="clean-list">
+            <li data-i18n="scan1">Known barcode details are prefilled</li>
+            <li data-i18n="scan2">New barcodes are learned when you save</li>
+            <li data-i18n="scan3">Warns you about duplicate barcodes</li>
+          </ul>
+        </div>
+        <img class="scan-shot" src="assets/iphone-barcode.png" alt="Barcode scanning in Filary" width="360" height="782" loading="lazy">
+      </div>
+    </section>
+
+    <section class="section" id="showcase">
+      <div class="shell">
+        <div class="intro">
+          <p class="kicker" data-i18n="screensKicker">Built for every screen</p>
+          <h2 data-i18n="screensTitle">Comfortable on iPhone. Spacious on iPad.</h2>
+          <p data-i18n="screensBody">Use a focused list on the go or a detailed table when you have more room.</p>
+        </div>
+        <div class="device-grid">
+          <article class="device-card">
+            <div>
+              <h3 data-i18n="phoneTitle">Inventory in your pocket</h3>
+              <p data-i18n="phoneBody">Quick search and filters keep the right spool within reach.</p>
+            </div>
+            <img class="iphone" src="assets/iphone-02.png" alt="Filary inventory on iPhone" width="660" height="1434" loading="lazy">
+          </article>
+          <article class="device-card">
+            <div>
+              <h3 data-i18n="ipadTitle">A complete view on iPad</h3>
+              <p data-i18n="ipadBody">Dashboard and inventory sit side by side without stretching or distortion.</p>
+            </div>
+            <img class="ipad" src="assets/ipad-landscape.png" alt="Filary dashboard and inventory on iPad" width="1600" height="1051" loading="lazy">
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="more">
+      <div class="shell">
+        <div class="intro">
+          <p class="kicker" data-i18n="moreKicker">More than the basics</p>
+          <h2 data-i18n="moreTitle">Everything you need, nothing in the way.</h2>
+          <p data-i18n="moreBody">Beyond search and scanning, Filary helps you stay on top of your stock day to day.</p>
+        </div>
+        <div class="cap-grid">
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">♫</div>
+            <div>
+              <h3 data-i18n="cap1Title">Voice updates</h3>
+              <p data-i18n="cap1Body">Update quantities hands-free by voice in the table view.</p>
+            </div>
+          </article>
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">◎</div>
+            <div>
+              <h3 data-i18n="cap2Title">Low-stock alerts</h3>
+              <p data-i18n="cap2Body">Get notified before a filament runs out mid-print.</p>
+            </div>
+          </article>
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">▦</div>
+            <div>
+              <h3 data-i18n="cap3Title">Home Screen widget</h3>
+              <p data-i18n="cap3Body">See your stock at a glance without opening the app.</p>
+            </div>
+          </article>
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">☰</div>
+            <div>
+              <h3 data-i18n="cap4Title">List and table views</h3>
+              <p data-i18n="cap4Body">A focused list on the go, a detailed table when you need it.</p>
+            </div>
+          </article>
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">↺</div>
+            <div>
+              <h3 data-i18n="cap5Title">Add history</h3>
+              <p data-i18n="cap5Body">Jump back to spools you added recently.</p>
+            </div>
+          </article>
+          <article class="cap-item">
+            <div class="cap-mark" aria-hidden="true">≈</div>
+            <div>
+              <h3 data-i18n="cap6Title">Humidity guidance</h3>
+              <p data-i18n="cap6Body">A simple dryness estimate for each opened spool.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="shell">
+        <div class="intro">
+          <p class="kicker" data-i18n="workflowKicker">Simple by design</p>
+          <h2 data-i18n="workflowTitle">A three-step routine.</h2>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <h3 data-i18n="step1Title">Add or scan</h3>
+            <p data-i18n="step1Body">Enter a spool manually or scan its label with Filary Pro.</p>
+          </article>
+          <article class="step">
+            <h3 data-i18n="step2Title">Find and filter</h3>
+            <p data-i18n="step2Body">Locate the right brand, material or color in seconds.</p>
+          </article>
+          <article class="step">
+            <h3 data-i18n="step3Title">Keep it accurate</h3>
+            <p data-i18n="step3Body">Update quantities and remaining weight after each print.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell privacy">
+        <h2 data-i18n="privacyTitle">Your inventory stays yours.</h2>
+        <div>
+          <p data-i18n="privacyBody">Filary is local-first. iCloud synchronization is optional, and your inventory can be exported whenever you want.</p>
+          <div class="privacy-tags">
+            <span data-i18n="privacy1">Local-first</span>
+            <span data-i18n="privacy2">Optional iCloud</span>
+            <span data-i18n="privacy3">CSV &amp; JSON export</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt closing">
+      <div class="shell closing-inner">
+        <p class="kicker" data-i18n="closingKicker">Filary Pro</p>
+        <h2 data-i18n="closingTitle">Unlimited inventory and barcode scanning.</h2>
+        <p data-i18n="closingBody">Start with up to 10 spools, then unlock unlimited inventory and barcode scanning with one purchase.</p>
+        <div class="actions">
+          <a class="button button-primary" href="mailto:sramezani52@gmail.com" data-i18n="closingButton">Contact Filary</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span>© 2026 Filary</span>
+      <div class="footer-links">
+        <a href="support/" data-i18n="supportLink">Support</a>
+        <a href="privacy/" data-i18n="privacyLink">Privacy</a>
+        <a href="mailto:sramezani52@gmail.com">sramezani52@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        heroKicker: "Filament inventory for iPhone & iPad",
+        heroTitle: "Know exactly what <span>filament you have.</span>",
+        heroBody: "Track every spool by brand, material, color and remaining weight. Find the right filament before your next print.",
+        heroPrimary: "See it in action", heroSecondary: "Explore features",
+        trust1: "Fast filtering", trust2: "Barcode scanning", trust3: "Optional iCloud sync",
+        essentialsKicker: "The essentials", essentialsTitle: "Less searching. More printing.", essentialsBody: "Everything important is close at hand, without turning inventory into a chore.",
+        feature1Title: "Find the right spool", feature1Body: "Search and filter by brand, material, color, status or remaining weight.",
+        feature2Title: "Scan instead of typing", feature2Body: "Known barcodes prefill saved details. Review and save a new barcode once, and Filary learns it for next time.",
+        feature3Title: "Know what remains", feature3Body: "Record current weight and see how much filament is still available.",
+        scanKicker: "Filary Pro", scanTitle: "Scan the label. Skip the typing.", scanBody: "Point your camera at a spool label. If the barcode is already in your catalog, Filary prefills the saved brand, material, color and weight. If it is new, review or complete the details once and save the spool; Filary then learns the barcode and recognizes it automatically the next time.",
+        scan1: "Known barcode details are prefilled", scan2: "New barcodes are learned when you save", scan3: "Warns you about duplicate barcodes",
+        screensKicker: "Built for every screen", screensTitle: "Comfortable on iPhone. Spacious on iPad.", screensBody: "Use a focused list on the go or a detailed table when you have more room.",
+        phoneTitle: "Inventory in your pocket", phoneBody: "Quick search and filters keep the right spool within reach.",
+        ipadTitle: "A complete view on iPad", ipadBody: "Dashboard and inventory sit side by side without stretching or distortion.",
+        moreKicker: "More than the basics", moreTitle: "Everything you need, nothing in the way.", moreBody: "Beyond search and scanning, Filary helps you stay on top of your stock day to day.",
+        cap1Title: "Voice updates", cap1Body: "Update quantities hands-free by voice in the table view.",
+        cap2Title: "Low-stock alerts", cap2Body: "Get notified before a filament runs out mid-print.",
+        cap3Title: "Home Screen widget", cap3Body: "See your stock at a glance without opening the app.",
+        cap4Title: "List and table views", cap4Body: "A focused list on the go, a detailed table when you need it.",
+        cap5Title: "Add history", cap5Body: "Jump back to spools you added recently.",
+        cap6Title: "Humidity guidance", cap6Body: "A simple dryness estimate for each opened spool.",
+        workflowKicker: "Simple by design", workflowTitle: "A three-step routine.",
+        step1Title: "Add or scan", step1Body: "Enter a spool manually or scan its label with Filary Pro.",
+        step2Title: "Find and filter", step2Body: "Locate the right brand, material or color in seconds.",
+        step3Title: "Keep it accurate", step3Body: "Update quantities and remaining weight after each print.",
+        privacyTitle: "Your inventory stays yours.", privacyBody: "Filary is local-first. iCloud synchronization is optional, and your inventory can be exported whenever you want.",
+        privacy1: "Local-first", privacy2: "Optional iCloud", privacy3: "CSV & JSON export",
+        closingKicker: "Filary Pro", closingTitle: "Unlimited inventory and barcode scanning.", closingBody: "Start with up to 10 spools, then unlock unlimited inventory and barcode scanning with one purchase.", closingButton: "Contact Filary",
+        supportLink: "Support", privacyLink: "Privacy"
+      },
+      fr: {
+        heroKicker: "Inventaire de filament pour iPhone et iPad",
+        heroTitle: "Sachez exactement quel <span>filament vous avez.</span>",
+        heroBody: "Suivez chaque bobine par marque, matière, couleur et poids restant. Trouvez le bon filament avant votre prochaine impression.",
+        heroPrimary: "Voir l’application", heroSecondary: "Découvrir les fonctions",
+        trust1: "Filtres rapides", trust2: "Scan de code-barres", trust3: "Synchronisation iCloud optionnelle",
+        essentialsKicker: "L’essentiel", essentialsTitle: "Moins de recherche. Plus d’impression.", essentialsBody: "Tout ce qui compte reste à portée de main, sans transformer l’inventaire en corvée.",
+        feature1Title: "Trouvez la bonne bobine", feature1Body: "Recherchez par marque, matière, couleur, état ou poids restant.",
+        feature2Title: "Scannez au lieu de saisir", feature2Body: "Les codes connus préremplissent les informations enregistrées. Vérifiez et enregistrez une fois un nouveau code : Filary l’apprendra pour les prochains scans.",
+        feature3Title: "Connaissez le poids restant", feature3Body: "Saisissez le poids actuel et voyez immédiatement le filament disponible.",
+        scanKicker: "Filary Pro", scanTitle: "Scannez l’étiquette. Évitez la saisie.", scanBody: "Visez l’étiquette d’une bobine. Si le code-barres existe déjà dans votre catalogue, Filary préremplit la marque, la matière, la couleur et le poids enregistrés. S’il est nouveau, vérifiez ou complétez ces informations une première fois, puis enregistrez la bobine : Filary apprend alors le code-barres et le reconnaîtra automatiquement lors du prochain scan.",
+        scan1: "Préremplissage des codes-barres connus", scan2: "Apprentissage des nouveaux codes à l’enregistrement", scan3: "Alerte en cas de code-barres dupliqué",
+        screensKicker: "Conçu pour chaque écran", screensTitle: "Pratique sur iPhone. Spacieux sur iPad.", screensBody: "Utilisez une liste claire en mobilité ou un tableau détaillé lorsque vous avez plus d’espace.",
+        phoneTitle: "L’inventaire dans votre poche", phoneBody: "La recherche et les filtres rendent chaque bobine immédiatement accessible.",
+        ipadTitle: "Une vue complète sur iPad", ipadBody: "Le tableau de bord et l’inventaire restent côte à côte, sans étirement ni déformation.",
+        moreKicker: "Plus que l’essentiel", moreTitle: "Tout ce qu’il faut, rien qui gêne.", moreBody: "Au-delà de la recherche et du scan, Filary vous aide à garder votre stock à jour au quotidien.",
+        cap1Title: "Mise à jour vocale", cap1Body: "Modifiez les quantités à la voix dans la vue tableau, sans les mains.",
+        cap2Title: "Alertes de stock bas", cap2Body: "Soyez prévenu avant de tomber en rupture en pleine impression.",
+        cap3Title: "Widget écran d’accueil", cap3Body: "Voyez votre stock d’un coup d’œil sans ouvrir l’application.",
+        cap4Title: "Vues liste et tableau", cap4Body: "Une liste claire en mobilité, un tableau détaillé au besoin.",
+        cap5Title: "Historique d’ajout", cap5Body: "Revenez aux bobines ajoutées récemment.",
+        cap6Title: "Indice d’humidité", cap6Body: "Une estimation simple du séchage de chaque bobine ouverte.",
+        workflowKicker: "Simple par nature", workflowTitle: "Une routine en trois étapes.",
+        step1Title: "Ajoutez ou scannez", step1Body: "Saisissez une bobine ou scannez son étiquette avec Filary Pro.",
+        step2Title: "Cherchez et filtrez", step2Body: "Trouvez la bonne marque, matière ou couleur en quelques secondes.",
+        step3Title: "Gardez un stock précis", step3Body: "Mettez à jour les quantités et le poids restant après chaque impression.",
+        privacyTitle: "Votre inventaire reste le vôtre.", privacyBody: "Filary fonctionne d’abord en local. La synchronisation iCloud est optionnelle et vous pouvez exporter vos données à tout moment.",
+        privacy1: "Données locales", privacy2: "iCloud optionnel", privacy3: "Export CSV et JSON",
+        closingKicker: "Filary Pro", closingTitle: "Inventaire illimité et scan de code-barres.", closingBody: "Commencez avec 10 bobines, puis débloquez l’inventaire illimité et le scan avec un achat unique.", closingButton: "Contacter Filary",
+        supportLink: "Assistance", privacyLink: "Confidentialité"
+      },
+      de: {
+        heroKicker: "Filament-Inventar für iPhone und iPad",
+        heroTitle: "Wissen Sie genau, welches <span>Filament Sie haben.</span>",
+        heroBody: "Verwalten Sie jede Spule nach Marke, Material, Farbe und Restgewicht. Finden Sie vor dem nächsten Druck das richtige Filament.",
+        heroPrimary: "App ansehen", heroSecondary: "Funktionen entdecken",
+        trust1: "Schnelle Filter", trust2: "Barcode-Scan", trust3: "Optionaler iCloud-Sync",
+        essentialsKicker: "Das Wesentliche", essentialsTitle: "Weniger suchen. Mehr drucken.", essentialsBody: "Alles Wichtige ist sofort erreichbar, ohne dass die Inventur zur Aufgabe wird.",
+        feature1Title: "Die richtige Spule finden", feature1Body: "Nach Marke, Material, Farbe, Status oder Restgewicht suchen und filtern.",
+        feature2Title: "Scannen statt tippen", feature2Body: "Bekannte Barcodes füllen gespeicherte Daten vor. Einen neuen Barcode einmal prüfen und speichern – Filary lernt ihn für den nächsten Scan.",
+        feature3Title: "Restmenge kennen", feature3Body: "Aktuelles Gewicht erfassen und verfügbares Filament sofort sehen.",
+        scanKicker: "Filary Pro", scanTitle: "Etikett scannen. Tippen sparen.", scanBody: "Richten Sie die Kamera auf das Spulenetikett. Ist der Barcode bereits in Ihrem Katalog gespeichert, füllt Filary Marke, Material, Farbe und Gewicht aus den gespeicherten Daten vor. Ist er neu, prüfen oder ergänzen Sie die Angaben einmal und speichern Sie die Spule. Danach lernt Filary den Barcode und erkennt ihn beim nächsten Scan automatisch.",
+        scan1: "Gespeicherte Daten bekannter Barcodes", scan2: "Neue Barcodes werden beim Speichern gelernt", scan3: "Warnung bei doppelten Barcodes",
+        screensKicker: "Für jeden Bildschirm", screensTitle: "Übersichtlich auf dem iPhone. Großzügig auf dem iPad.", screensBody: "Unterwegs eine klare Liste nutzen oder auf dem großen Bildschirm eine detaillierte Tabelle öffnen.",
+        phoneTitle: "Inventar für unterwegs", phoneBody: "Suche und Filter halten die richtige Spule griffbereit.",
+        ipadTitle: "Komplette Übersicht auf dem iPad", ipadBody: "Dashboard und Inventar stehen unverzerrt nebeneinander.",
+        moreKicker: "Mehr als die Grundlagen", moreTitle: "Alles, was du brauchst – nichts im Weg.", moreBody: "Über Suche und Scan hinaus hilft dir Filary, deinen Bestand im Alltag im Blick zu behalten.",
+        cap1Title: "Sprachaktualisierung", cap1Body: "Ändere Mengen freihändig per Sprache in der Tabellenansicht.",
+        cap2Title: "Niedrigbestandswarnungen", cap2Body: "Werde benachrichtigt, bevor ein Filament mitten im Druck ausgeht.",
+        cap3Title: "Home-Screen-Widget", cap3Body: "Sieh deinen Bestand auf einen Blick, ohne die App zu öffnen.",
+        cap4Title: "Listen- und Tabellenansicht", cap4Body: "Unterwegs eine klare Liste, bei Bedarf eine detaillierte Tabelle.",
+        cap5Title: "Verlauf", cap5Body: "Springe zu kürzlich hinzugefügten Spulen zurück.",
+        cap6Title: "Feuchtigkeitshinweis", cap6Body: "Eine einfache Trockenheitsschätzung für jede geöffnete Spule.",
+        workflowKicker: "Bewusst einfach", workflowTitle: "Ein Ablauf in drei Schritten.",
+        step1Title: "Hinzufügen oder scannen", step1Body: "Spule manuell eingeben oder das Etikett mit Filary Pro scannen.",
+        step2Title: "Suchen und filtern", step2Body: "Marke, Material oder Farbe in Sekunden finden.",
+        step3Title: "Bestand aktuell halten", step3Body: "Mengen und Restgewicht nach jedem Druck aktualisieren.",
+        privacyTitle: "Ihr Inventar bleibt Ihres.", privacyBody: "Filary arbeitet zuerst lokal. iCloud-Sync ist optional und Ihre Daten können jederzeit exportiert werden.",
+        privacy1: "Lokal gespeichert", privacy2: "Optionales iCloud", privacy3: "CSV- und JSON-Export",
+        closingKicker: "Filary Pro", closingTitle: "Unbegrenztes Inventar und Barcode-Scan.", closingBody: "Starten Sie mit bis zu 10 Spulen und schalten Sie mit einem Kauf unbegrenztes Inventar und Scannen frei.", closingButton: "Filary kontaktieren",
+        supportLink: "Support", privacyLink: "Datenschutz"
+      },
+      es: {
+        heroKicker: "Inventario de filamento para iPhone y iPad",
+        heroTitle: "Sepa exactamente qué <span>filamento tiene.</span>",
+        heroBody: "Controle cada bobina por marca, material, color y peso restante. Encuentre el filamento correcto antes de su próxima impresión.",
+        heroPrimary: "Ver la aplicación", heroSecondary: "Descubrir funciones",
+        trust1: "Filtros rápidos", trust2: "Escaneo de códigos", trust3: "Sincronización iCloud opcional",
+        essentialsKicker: "Lo esencial", essentialsTitle: "Menos búsquedas. Más impresión.", essentialsBody: "Todo lo importante está a mano, sin convertir el inventario en una tarea pesada.",
+        feature1Title: "Encuentre la bobina correcta", feature1Body: "Busque por marca, material, color, estado o peso restante.",
+        feature2Title: "Escanee en vez de escribir", feature2Body: "Los códigos conocidos completan los datos guardados. Revise y guarde un código nuevo una vez, y Filary lo aprenderá para el próximo escaneo.",
+        feature3Title: "Sepa cuánto queda", feature3Body: "Registre el peso actual y vea el filamento disponible.",
+        scanKicker: "Filary Pro", scanTitle: "Escanee la etiqueta. Evite escribir.", scanBody: "Apunte la cámara a la etiqueta. Si el código ya está guardado en su catálogo, Filary completa la marca, el material, el color y el peso almacenados. Si es nuevo, revise o complete la información una vez y guarde la bobina. Filary aprenderá el código y lo reconocerá automáticamente en el próximo escaneo.",
+        scan1: "Datos completados para códigos conocidos", scan2: "Los códigos nuevos se aprenden al guardar", scan3: "Aviso de códigos duplicados",
+        screensKicker: "Diseñado para cada pantalla", screensTitle: "Cómodo en iPhone. Amplio en iPad.", screensBody: "Use una lista clara en movimiento o una tabla detallada cuando tenga más espacio.",
+        phoneTitle: "El inventario en su bolsillo", phoneBody: "La búsqueda y los filtros mantienen cada bobina al alcance.",
+        ipadTitle: "Vista completa en iPad", ipadBody: "El panel y el inventario aparecen juntos sin estiramientos ni deformaciones.",
+        moreKicker: "Más que lo básico", moreTitle: "Todo lo que necesitas, sin estorbos.", moreBody: "Más allá de la búsqueda y el escaneo, Filary te ayuda a mantener tu stock al día.",
+        cap1Title: "Actualización por voz", cap1Body: "Cambia cantidades por voz en la vista de tabla, sin usar las manos.",
+        cap2Title: "Alertas de stock bajo", cap2Body: "Recibe un aviso antes de quedarte sin filamento a mitad de impresión.",
+        cap3Title: "Widget en pantalla de inicio", cap3Body: "Consulta tu stock de un vistazo sin abrir la aplicación.",
+        cap4Title: "Vistas de lista y tabla", cap4Body: "Una lista clara en movimiento y una tabla detallada cuando la necesites.",
+        cap5Title: "Historial de añadidos", cap5Body: "Vuelve a las bobinas añadidas recientemente.",
+        cap6Title: "Indicador de humedad", cap6Body: "Una estimación simple del secado de cada bobina abierta.",
+        workflowKicker: "Diseño sencillo", workflowTitle: "Una rutina de tres pasos.",
+        step1Title: "Añada o escanee", step1Body: "Introduzca una bobina o escanee su etiqueta con Filary Pro.",
+        step2Title: "Busque y filtre", step2Body: "Encuentre marca, material o color en segundos.",
+        step3Title: "Mantenga todo al día", step3Body: "Actualice cantidades y peso restante después de cada impresión.",
+        privacyTitle: "Su inventario sigue siendo suyo.", privacyBody: "Filary funciona primero de forma local. iCloud es opcional y puede exportar sus datos cuando quiera.",
+        privacy1: "Datos locales", privacy2: "iCloud opcional", privacy3: "Exportación CSV y JSON",
+        closingKicker: "Filary Pro", closingTitle: "Inventario ilimitado y escaneo de códigos.", closingBody: "Empiece con hasta 10 bobinas y desbloquee el inventario ilimitado y el escaneo con una sola compra.", closingButton: "Contactar con Filary",
+        supportLink: "Soporte", privacyLink: "Privacidad"
+      }
+    };
+
+    const picker = document.getElementById("language");
+    function applyLanguage(language) {
+      const lang = translations[language] ? language : "en";
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const value = translations[lang][element.dataset.i18n];
+        if (value) element.innerHTML = value;
+      });
+      picker.value = lang;
+      try { localStorage.setItem("spool-mate-language", lang); } catch (_) {}
+    }
+    let initialLanguage = "en";
+    try { initialLanguage = localStorage.getItem("spool-mate-language") || "en"; } catch (_) {}
+    picker.addEventListener("change", (event) => applyLanguage(event.target.value));
+    applyLanguage(initialLanguage);
+  </script>
+</body>
+</html>
