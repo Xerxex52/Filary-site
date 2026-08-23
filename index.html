@@ -286,9 +286,7 @@
     .gallery-head .intro { margin-bottom: 0; }
     .gallery-hint { flex: 0 0 auto; color: var(--muted); font-size: .9rem; }
     .shot-rail {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(210px, 255px);
+      display: flex;
       gap: 18px;
       overflow-x: auto;
       padding: 4px max(24px, calc((100vw - var(--max)) / 2)) 34px;
@@ -298,6 +296,7 @@
       overscroll-behavior-inline: contain;
     }
     .shot-card {
+      flex: 0 0 255px;
       margin: 0;
       scroll-snap-align: center;
       overflow: hidden;
@@ -309,7 +308,7 @@
     }
     .shot-card:hover { transform: translateY(-6px); border-color: rgba(98,231,158,.34); }
     .shot-card img { width: 100%; }
-    .shot-card-ipad { grid-auto-columns: auto; min-width: 390px; }
+    .shot-card-ipad { flex-basis: 390px; }
     .shot-card-ipad img { aspect-ratio: 3 / 4; object-fit: cover; }
 
     .plans {
@@ -408,8 +407,9 @@
       .video-stage { min-height: 600px; padding: 34px 20px 24px; }
       .video-stage video { width: min(76vw,300px); }
       .gallery-head { align-items: start; flex-direction: column; margin-bottom: 30px; }
-      .shot-rail { grid-auto-columns: minmax(210px, 72vw); padding-inline: 18px; }
-      .shot-card-ipad { min-width: min(78vw,430px); }
+      .shot-rail { padding-inline: 18px; }
+      .shot-card { flex-basis: min(72vw,280px); }
+      .shot-card-ipad { flex-basis: min(78vw,430px); }
       .feature-card { min-height: 0; padding: 26px; }
       .feature-mark { margin-bottom: 24px; }
       .spotlight { gap: 42px; }
