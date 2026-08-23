@@ -259,8 +259,8 @@
       border: 1px solid var(--line);
       border-radius: 38px;
       background:
-        radial-gradient(circle at 50% 36%, rgba(98,231,158,.16), transparent 42%),
-        linear-gradient(145deg,#10251b,#07100d 70%);
+        radial-gradient(circle at 50% 36%, rgba(255,255,255,.08), transparent 44%),
+        linear-gradient(145deg,#18201d,#080d0b 72%);
       box-shadow: var(--shadow);
     }
     .video-stage::before {
@@ -278,7 +278,7 @@
       max-height: 590px;
       border: 1px solid rgba(255,255,255,.15);
       border-radius: 32px;
-      background: #07100d;
+      background: #f6f7f6;
       box-shadow: 0 28px 70px rgba(0,0,0,.52);
     }
 
@@ -287,6 +287,7 @@
     .gallery-hint { flex: 0 0 auto; color: var(--muted); font-size: .9rem; }
     .shot-rail {
       display: flex;
+      align-items: flex-start;
       gap: 18px;
       overflow-x: auto;
       padding: 4px max(24px, calc((100vw - var(--max)) / 2)) 34px;
@@ -297,6 +298,7 @@
     }
     .shot-card {
       flex: 0 0 255px;
+      align-self: flex-start;
       margin: 0;
       scroll-snap-align: center;
       overflow: hidden;
@@ -307,9 +309,21 @@
       transition: transform .25s ease, border-color .25s ease;
     }
     .shot-card:hover { transform: translateY(-6px); border-color: rgba(98,231,158,.34); }
-    .shot-card img { width: 100%; }
-    .shot-card-ipad { flex-basis: 390px; }
-    .shot-card-ipad img { aspect-ratio: 3 / 4; object-fit: cover; }
+    .shot-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* Match the displayed height of a 255 px-wide iPhone capture.
+       Landscape iPads therefore need more width, not a smaller visual scale. */
+    .shot-card-ipad { flex-basis: 739px; }
+    /* Never force a crop on iPad captures: their exported height can differ by
+       a pixel from 4:3, and `cover` used to shave the bottom edge off. */
+    .shot-card-ipad img {
+      aspect-ratio: auto;
+      object-fit: contain;
+      object-position: center top;
+    }
 
     .plans {
       display: grid;
@@ -409,7 +423,9 @@
       .gallery-head { align-items: start; flex-direction: column; margin-bottom: 30px; }
       .shot-rail { padding-inline: 18px; }
       .shot-card { flex-basis: min(72vw,280px); }
-      .shot-card-ipad { flex-basis: min(78vw,430px); }
+      /* iPhone cards are min(72vw, 280px) wide. Multiplying by both source
+         aspect ratios gives an iPad card with the exact same displayed height. */
+      .shot-card-ipad { flex-basis: min(208.5vw,811px); }
       .feature-card { min-height: 0; padding: 26px; }
       .feature-mark { margin-bottom: 24px; }
       .spotlight { gap: 42px; }
@@ -535,8 +551,8 @@
           </ul>
         </div>
         <div class="video-stage">
-          <video controls playsinline preload="metadata" poster="assets/video-poster.webp?v=3" aria-label="Filary product tour">
-            <source src="assets/filary-tour.mp4?v=3" type="video/mp4">
+          <video controls playsinline preload="metadata" poster="assets/video-poster.webp?v=9" aria-label="Filary product tour">
+            <source src="assets/filary-tour.mp4?v=9" type="video/mp4">
           </video>
         </div>
       </div>
@@ -574,9 +590,9 @@
         <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=2" alt="Filary inventory filters" width="660" height="1434" loading="lazy"></figure>
         <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=2" alt="Filary low-stock alerts" width="660" height="1434" loading="lazy"></figure>
         <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-04.webp" src="assets/showcase/en/iphone-04.webp?v=2" alt="Filary barcode scanner" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-01.webp" src="assets/showcase/en/ipad-01.webp?v=2" alt="Filary on iPad" width="1032" height="1376" loading="lazy"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-02.webp" src="assets/showcase/en/ipad-02.webp?v=2" alt="Filary scanner on iPad" width="1032" height="1376" loading="lazy"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-03.webp" src="assets/showcase/en/ipad-03.webp?v=2" alt="Filary settings on iPad" width="1032" height="1376" loading="lazy"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-01.webp" src="assets/showcase/en/ipad-landscape-01.webp" alt="Filary on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-02.webp" src="assets/showcase/en/ipad-landscape-02.webp" alt="Filary scanner on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-03.webp" src="assets/showcase/en/ipad-landscape-03.webp" alt="Filary settings on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
       </div>
     </section>
 
@@ -892,7 +908,7 @@
         if (value) element.innerHTML = value;
       });
       document.querySelectorAll("[data-localized-src]").forEach((image) => {
-        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=2`;
+        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=4`;
       });
       picker.value = lang;
       try { localStorage.setItem("spool-mate-language", lang); } catch (_) {}
