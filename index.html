@@ -454,6 +454,16 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; }
     }
+
+    .release-note { color: var(--green); font-size: .88rem; margin: 18px 0 0; }
+    .catalog-stats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; margin: 32px 0 24px; }
+    .catalog-stat { padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
+    .catalog-stat strong { display: block; color: var(--green); font-size: clamp(2.2rem,5vw,3.5rem); line-height: 1.2; }
+    .catalog-stat span, .catalog-note { color: var(--muted-strong); }
+    .catalog-note { max-width: 850px; }
+    .brand-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 28px 0 0; }
+    .brand-list li { padding: 7px 14px; background: var(--green-soft); border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; }
+    @media (max-width: 720px) { .catalog-stats { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; } .catalog-stat { padding: 20px 16px; } }
   </style>
 </head>
 <body id="top">
@@ -493,11 +503,11 @@
           </ul>
         </div>
         <div class="hero-device">
-          <img class="hero-peek hero-peek-left" data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=2" alt="" aria-hidden="true" width="660" height="1434">
-          <img class="phone-shot" data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=2" alt="Filary inventory dashboard on iPhone" width="660" height="1434" fetchpriority="high">
-          <img class="hero-peek hero-peek-right" data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=2" alt="" aria-hidden="true" width="660" height="1434">
+          <img class="hero-peek hero-peek-left" data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="" aria-hidden="true" width="660" height="1434">
+          <img class="phone-shot" data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=122" alt="Filary inventory dashboard on iPhone" width="660" height="1434" fetchpriority="high">
+          <img class="hero-peek hero-peek-right" data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="" aria-hidden="true" width="660" height="1434">
           <div class="hero-badge hero-badge-top"><strong>10</strong> <span data-i18n="heroBadgeScans">saved scans included</span></div>
-          <div class="hero-badge hero-badge-bottom"><strong data-i18n="heroPrice">5.99 €</strong> <span data-i18n="heroBadgePrice">one-time Pro purchase</span></div>
+          <div class="hero-badge hero-badge-bottom"><strong data-i18n="heroPrice">€5.99</strong> <span data-i18n="heroBadgePrice">one-time Pro purchase</span></div>
         </div>
       </div>
     </section>
@@ -510,6 +520,25 @@
         <div class="signal"><strong data-i18n="signal4Title">One-time Pro</strong><span data-i18n="signal4Body">No subscription</span></div>
       </div>
     </div>
+
+    <section class="section section-alt" id="catalog">
+      <div class="shell">
+        <div class="intro">
+          <p class="kicker" data-i18n="catalogKicker">New in Filary 1.2.2</p>
+          <h2 data-i18n="catalogTitle">608 codes. Less typing.</h2>
+          <p data-i18n="catalogBody">The built-in catalog identifies the brand, material, color and weight, including whether a spool is included or it is a refill.</p>
+          <p class="release-note" data-i18n="releaseStatus">Version 1.2.2 is awaiting App Store review.</p>
+        </div>
+        <div class="catalog-stats">
+          <div class="catalog-stat"><strong>608</strong><span data-i18n="catalogCodes">recognized codes</span></div>
+          <div class="catalog-stat"><strong>579</strong><span data-i18n="catalogVariants">filament variants</span></div>
+          <div class="catalog-stat"><strong>12</strong><span data-i18n="catalogBrands">brands</span></div>
+          <div class="catalog-stat"><strong>365</strong><span data-i18n="catalogAdded">new codes</span></div>
+        </div>
+        <p class="catalog-note" data-i18n="catalogNote">579 variants are covered by 608 codes: some products have more than one identifier. 597 codes are for 1 kg filaments.</p>
+        <ul class="brand-list"><li>Anycubic</li><li>Bambu Lab</li><li>Polymaker</li><li>Snapmaker</li><li>Creality</li><li>Elegoo</li><li>eSUN</li><li>SUNLU</li><li>3DK</li><li>Fiberlogy</li><li>Prusament</li><li>Arianeplast</li></ul>
+      </div>
+    </section>
 
     <section class="section" id="features">
       <div class="shell">
@@ -527,7 +556,7 @@
           <article class="feature-card">
             <div class="feature-mark" aria-hidden="true">▥</div>
             <h3 data-i18n="feature2Title">Scan instead of typing</h3>
-            <p data-i18n="feature2Body">Known barcodes prefill saved details. Review and save a new barcode once, and Filary learns it for next time.</p>
+            <p data-i18n="feature2Body">Try 10 saved scans for free. Version 1.2.2 adds 365 built-in codes, bringing the catalog to 608 recognized codes.</p>
           </article>
           <article class="feature-card">
             <div class="feature-mark" aria-hidden="true">%</div>
@@ -543,16 +572,16 @@
         <div class="video-copy">
           <p class="kicker" data-i18n="videoKicker">See Filary in action</p>
           <h2 data-i18n="videoTitle">From a new spool to a clear workshop.</h2>
-          <p data-i18n="videoBody">A polished, easy-to-follow tour: add, scan, organize and know what is ready for your next print.</p>
+          <p data-i18n="videoBody">Follow the complete flow from the Home screen: add a spool, choose a color, scan Anycubic and Bambu Lab labels, then check your inventory.</p>
           <ul class="video-points">
             <li data-i18n="videoPoint1">Real app footage, no simulated interface</li>
-            <li data-i18n="videoPoint2">Key actions slowed just enough to follow</li>
+            <li data-i18n="videoPoint2">Full recording at 1.25× speed, with the opening preserved</li>
             <li data-i18n="videoPoint3">Filary on iPhone, designed for iPad too</li>
           </ul>
         </div>
         <div class="video-stage">
-          <video controls playsinline preload="metadata" poster="assets/video-poster.webp?v=9" aria-label="Filary product tour">
-            <source src="assets/filary-tour.mp4?v=9" type="video/mp4">
+          <video controls playsinline preload="metadata" poster="assets/video-poster-1.2.2.webp" aria-label="Filary product tour">
+            <source src="assets/filary-tour-1.2.2.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -561,16 +590,28 @@
     <section class="section section-alt">
       <div class="shell spotlight">
         <div class="spotlight-copy">
-          <p class="kicker" data-i18n="scanKicker">Filary Pro</p>
+          <p class="kicker" data-i18n="scanKicker">10 saved scans included</p>
           <h2 data-i18n="scanTitle">Scan the label. Skip the typing.</h2>
-          <p data-i18n="scanBody">Point your camera at a spool label. If the barcode is already in your catalog, Filary prefills the saved brand, material, color and weight. If it is new, review or complete the details once and save the spool; Filary then learns the barcode and recognizes it automatically the next time.</p>
+          <p data-i18n="scanBody">In version 1.2.2, 608 built-in codes cover 579 filament variants from 12 brands. Scan a supported label to prefill its details, then check and save. For a new barcode, complete the details once; Filary remembers them for your next scan.</p>
           <ul class="clean-list">
             <li data-i18n="scan1">Known barcode details are prefilled</li>
             <li data-i18n="scan2">New barcodes are learned when you save</li>
             <li data-i18n="scan3">Warns you about duplicate barcodes</li>
           </ul>
         </div>
-        <img class="scan-shot" data-localized-src="showcase/{lang}/iphone-04.webp" src="assets/showcase/en/iphone-04.webp?v=2" alt="Barcode scanning in Filary" width="660" height="1434" loading="lazy">
+        <img class="scan-shot" data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="Barcode scanning in Filary" width="660" height="1434" loading="lazy">
+      </div>
+    </section>
+
+    <section class="section section-alt" id="colors">
+      <div class="shell spotlight">
+        <div class="spotlight-copy">
+          <p class="kicker" data-i18n="colorsKicker">Your color palette</p>
+          <h2 data-i18n="colorsTitle">Find your shade. Keep your inventory.</h2>
+          <p data-i18n="colorsBody">Browse documented manufacturer colors, favorites and recently used shades. Filter by color family and check the English reference name.</p>
+          <p class="catalog-note" data-i18n="colorsNote">Your existing spools, weights and notes stay intact. No reimport needed.</p>
+        </div>
+        <img class="scan-shot" data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="Filary color palette, favorites and recent shades" width="660" height="1434" loading="lazy">
       </div>
     </section>
 
@@ -586,13 +627,16 @@
         </div>
       </div>
       <div class="shot-rail" aria-label="Filary screenshots">
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=2" alt="Filary stock overview" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=2" alt="Filary inventory filters" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=2" alt="Filary low-stock alerts" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-04.webp" src="assets/showcase/en/iphone-04.webp?v=2" alt="Filary barcode scanner" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-01.webp" src="assets/showcase/en/ipad-landscape-01.webp" alt="Filary on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-02.webp" src="assets/showcase/en/ipad-landscape-02.webp" alt="Filary scanner on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
-        <figure class="shot-card shot-card-ipad"><img data-localized-src="showcase/{lang}/ipad-landscape-03.webp" src="assets/showcase/en/ipad-landscape-03.webp" alt="Filary settings on iPad" width="1467" height="1100" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1467/1100;object-fit:contain"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=122" alt="Filary stock overview" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="608 recognized codes in Filary" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="Filary color palette" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-04.webp" src="assets/showcase/en/iphone-04.webp?v=122" alt="Filary inventory colors" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-05.webp" src="assets/showcase/en/iphone-05.webp?v=122" alt="Filary low-stock alerts" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-06.webp" src="assets/showcase/en/iphone-06.webp?v=122" alt="Filary Essential and Pro" width="660" height="1434" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-01.webp" src="assets/showcase/en/ipad-01.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-02.webp" src="assets/showcase/en/ipad-02.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-03.webp" src="assets/showcase/en/ipad-03.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-04.webp" src="assets/showcase/en/ipad-04.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
       </div>
     </section>
 
@@ -659,7 +703,7 @@
         <div class="steps">
           <article class="step">
             <h3 data-i18n="step1Title">Add or scan</h3>
-            <p data-i18n="step1Body">Enter a spool manually or scan its label with Filary Pro.</p>
+            <p data-i18n="step1Body">Enter a spool manually or try the 10 included barcode or label scans.</p>
           </article>
           <article class="step">
             <h3 data-i18n="step2Title">Find and filter</h3>
@@ -733,171 +777,427 @@
 
   <script>
     const translations = {
-      en: {
-        heroKicker: "Filament inventory for iPhone & iPad",
-        heroTitle: "Know exactly what <span>filament you have.</span>",
-        heroBody: "Track every spool by brand, material, color and remaining weight. Find the right filament before your next print.",
-        heroPrimary: "Download on the App Store", heroSecondary: "Explore features",
-        trust1: "Fast filtering", trust2: "Barcode scanning", trust3: "Optional iCloud sync",
-        heroBadgeScans: "saved scans included", heroPrice: "€5.99", heroBadgePrice: "one-time Pro purchase",
-        signal1Title: "iPhone + iPad", signal1Body: "One inventory everywhere",
-        signal2Title: "Local-first", signal2Body: "Your workshop data stays yours",
-        signal3Title: "4 languages", signal3Body: "English, French, German, Spanish",
-        signal4Title: "One-time Pro", signal4Body: "No subscription",
-        essentialsKicker: "The essentials", essentialsTitle: "Less searching. More printing.", essentialsBody: "Everything important is close at hand, without turning inventory into a chore.",
-        feature1Title: "Find the right spool", feature1Body: "Search and filter by brand, material, color, status or remaining weight.",
-        feature2Title: "Scan instead of typing", feature2Body: "Known barcodes prefill saved details. Review and save a new barcode once, and Filary learns it for next time.",
-        feature3Title: "Know what remains", feature3Body: "Record current weight and see how much filament is still available.",
-        videoKicker: "See Filary in action", videoTitle: "From a new spool to a clear workshop.", videoBody: "A polished, easy-to-follow tour: add, scan, organize and know what is ready for your next print.",
-        videoPoint1: "Real app footage, no simulated interface", videoPoint2: "Key actions slowed just enough to follow", videoPoint3: "Filary on iPhone, designed for iPad too",
-        scanKicker: "Filary Pro", scanTitle: "Scan the label. Skip the typing.", scanBody: "Point your camera at a spool label. If the barcode is already in your catalog, Filary prefills the saved brand, material, color and weight. If it is new, review or complete the details once and save the spool; Filary then learns the barcode and recognizes it automatically the next time.",
-        scan1: "Known barcode details are prefilled", scan2: "New barcodes are learned when you save", scan3: "Warns you about duplicate barcodes",
-        screensKicker: "Built for every screen", screensTitle: "Comfortable on iPhone. Spacious on iPad.", screensBody: "Use a focused list on the go or a detailed table when you have more room.",
-        galleryHint: "Swipe to explore →",
-        phoneTitle: "Inventory in your pocket", phoneBody: "Quick search and filters keep the right spool within reach.",
-        ipadTitle: "A complete view on iPad", ipadBody: "Dashboard and inventory sit side by side without stretching or distortion.",
-        moreKicker: "More than the basics", moreTitle: "Everything you need, nothing in the way.", moreBody: "Beyond search and scanning, Filary helps you stay on top of your stock day to day.",
-        cap1Title: "Voice updates", cap1Body: "Update quantities hands-free by voice in the table view.",
-        cap2Title: "Low-stock alerts", cap2Body: "Get notified before a filament runs out mid-print.",
-        cap3Title: "Home Screen widget", cap3Body: "See your stock at a glance without opening the app.",
-        cap4Title: "List and table views", cap4Body: "A focused list on the go, a detailed table when you need it.",
-        cap5Title: "Add history", cap5Body: "Jump back to spools you added recently.",
-        cap6Title: "Humidity guidance", cap6Body: "A simple dryness estimate for each opened spool.",
-        workflowKicker: "Simple by design", workflowTitle: "A three-step routine.",
-        step1Title: "Add or scan", step1Body: "Enter a spool manually or scan its label with Filary Pro.",
-        step2Title: "Find and filter", step2Body: "Locate the right brand, material or color in seconds.",
-        step3Title: "Keep it accurate", step3Body: "Update quantities and remaining weight after each print.",
-        privacyTitle: "Your inventory stays yours.", privacyBody: "Filary is local-first. iCloud synchronization is optional, and your inventory can be exported whenever you want.",
-        privacy1: "Local-first", privacy2: "Optional iCloud", privacy3: "CSV & JSON export",
-        closingKicker: "Filary Pro", closingTitle: "Unlimited inventory and barcode scanning.", closingBody: "Start with Essential, then unlock unlimited inventory, unlimited saved scans and voice commands with one purchase.", closingButton: "Download Filary",
-        essential1: "Up to 10 spools", essential2: "10 saved barcode or label scans", essential3: "Filters, alerts, iCloud and exports",
-        proTitle: "The complete workshop toolkit", proPrice: "5.99 € · one-time purchase", pro1: "Unlimited spools", pro2: "Unlimited saved scans", pro3: "Voice commands",
-        supportLink: "Support", privacyLink: "Privacy"
-      },
-      fr: {
-        heroKicker: "Inventaire de filament pour iPhone et iPad",
-        heroTitle: "Sachez exactement quel <span>filament vous avez.</span>",
-        heroBody: "Suivez chaque bobine par marque, matière, couleur et poids restant. Trouvez le bon filament avant votre prochaine impression.",
-        heroPrimary: "Télécharger sur l’App Store", heroSecondary: "Découvrir les fonctions",
-        trust1: "Filtres rapides", trust2: "Scan de code-barres", trust3: "Synchronisation iCloud optionnelle",
-        heroBadgeScans: "scans enregistrés inclus", heroPrice: "5,99 €", heroBadgePrice: "achat Pro unique",
-        signal1Title: "iPhone + iPad", signal1Body: "Un inventaire partout",
-        signal2Title: "D’abord en local", signal2Body: "Vos données d’atelier restent à vous",
-        signal3Title: "4 langues", signal3Body: "Français, anglais, allemand, espagnol",
-        signal4Title: "Pro en achat unique", signal4Body: "Sans abonnement",
-        essentialsKicker: "L’essentiel", essentialsTitle: "Moins de recherche. Plus d’impression.", essentialsBody: "Tout ce qui compte reste à portée de main, sans transformer l’inventaire en corvée.",
-        feature1Title: "Trouvez la bonne bobine", feature1Body: "Recherchez par marque, matière, couleur, état ou poids restant.",
-        feature2Title: "Scannez au lieu de saisir", feature2Body: "Les codes connus préremplissent les informations enregistrées. Vérifiez et enregistrez une fois un nouveau code : Filary l’apprendra pour les prochains scans.",
-        feature3Title: "Connaissez le poids restant", feature3Body: "Saisissez le poids actuel et voyez immédiatement le filament disponible.",
-        videoKicker: "Voyez Filary en action", videoTitle: "D’une nouvelle bobine à un atelier bien rangé.", videoBody: "Un parcours soigné et facile à suivre : ajoutez, scannez, organisez et sachez ce qui est prêt pour votre prochaine impression.",
-        videoPoint1: "L’application réelle, sans interface simulée", videoPoint2: "Les actions importantes ralenties juste ce qu’il faut", videoPoint3: "Filary sur iPhone, également conçu pour iPad",
-        scanKicker: "Filary Pro", scanTitle: "Scannez l’étiquette. Évitez la saisie.", scanBody: "Visez l’étiquette d’une bobine. Si le code-barres existe déjà dans votre catalogue, Filary préremplit la marque, la matière, la couleur et le poids enregistrés. S’il est nouveau, vérifiez ou complétez ces informations une première fois, puis enregistrez la bobine : Filary apprend alors le code-barres et le reconnaîtra automatiquement lors du prochain scan.",
-        scan1: "Préremplissage des codes-barres connus", scan2: "Apprentissage des nouveaux codes à l’enregistrement", scan3: "Alerte en cas de code-barres dupliqué",
-        screensKicker: "Conçu pour chaque écran", screensTitle: "Pratique sur iPhone. Spacieux sur iPad.", screensBody: "Utilisez une liste claire en mobilité ou un tableau détaillé lorsque vous avez plus d’espace.",
-        galleryHint: "Faites défiler pour explorer →",
-        phoneTitle: "L’inventaire dans votre poche", phoneBody: "La recherche et les filtres rendent chaque bobine immédiatement accessible.",
-        ipadTitle: "Une vue complète sur iPad", ipadBody: "Le tableau de bord et l’inventaire restent côte à côte, sans étirement ni déformation.",
-        moreKicker: "Plus que l’essentiel", moreTitle: "Tout ce qu’il faut, rien qui gêne.", moreBody: "Au-delà de la recherche et du scan, Filary vous aide à garder votre stock à jour au quotidien.",
-        cap1Title: "Mise à jour vocale", cap1Body: "Modifiez les quantités à la voix dans la vue tableau, sans les mains.",
-        cap2Title: "Alertes de stock bas", cap2Body: "Soyez prévenu avant de tomber en rupture en pleine impression.",
-        cap3Title: "Widget écran d’accueil", cap3Body: "Voyez votre stock d’un coup d’œil sans ouvrir l’application.",
-        cap4Title: "Vues liste et tableau", cap4Body: "Une liste claire en mobilité, un tableau détaillé au besoin.",
-        cap5Title: "Historique d’ajout", cap5Body: "Revenez aux bobines ajoutées récemment.",
-        cap6Title: "Indice d’humidité", cap6Body: "Une estimation simple du séchage de chaque bobine ouverte.",
-        workflowKicker: "Simple par nature", workflowTitle: "Une routine en trois étapes.",
-        step1Title: "Ajoutez ou scannez", step1Body: "Saisissez une bobine ou scannez son étiquette avec Filary Pro.",
-        step2Title: "Cherchez et filtrez", step2Body: "Trouvez la bonne marque, matière ou couleur en quelques secondes.",
-        step3Title: "Gardez un stock précis", step3Body: "Mettez à jour les quantités et le poids restant après chaque impression.",
-        privacyTitle: "Votre inventaire reste le vôtre.", privacyBody: "Filary fonctionne d’abord en local. La synchronisation iCloud est optionnelle et vous pouvez exporter vos données à tout moment.",
-        privacy1: "Données locales", privacy2: "iCloud optionnel", privacy3: "Export CSV et JSON",
-        closingKicker: "Filary Pro", closingTitle: "Inventaire illimité et scan de code-barres.", closingBody: "Commencez avec Essential, puis débloquez les bobines et scans enregistrés illimités ainsi que les commandes vocales en un seul achat.", closingButton: "Télécharger Filary",
-        essential1: "Jusqu’à 10 bobines", essential2: "10 scans de code-barres ou d’étiquette enregistrés", essential3: "Filtres, alertes, iCloud et exports",
-        proTitle: "La boîte à outils complète", proPrice: "5,99 € · achat unique", pro1: "Bobines illimitées", pro2: "Scans enregistrés illimités", pro3: "Commandes vocales",
-        supportLink: "Assistance", privacyLink: "Confidentialité"
-      },
-      de: {
-        heroKicker: "Filament-Inventar für iPhone und iPad",
-        heroTitle: "Wissen Sie genau, welches <span>Filament Sie haben.</span>",
-        heroBody: "Verwalten Sie jede Spule nach Marke, Material, Farbe und Restgewicht. Finden Sie vor dem nächsten Druck das richtige Filament.",
-        heroPrimary: "Im App Store laden", heroSecondary: "Funktionen entdecken",
-        trust1: "Schnelle Filter", trust2: "Barcode-Scan", trust3: "Optionaler iCloud-Sync",
-        heroBadgeScans: "gespeicherte Scans inklusive", heroPrice: "5,99 €", heroBadgePrice: "einmaliger Pro-Kauf",
-        signal1Title: "iPhone + iPad", signal1Body: "Ein Inventar auf allen Geräten",
-        signal2Title: "Zuerst lokal", signal2Body: "Ihre Werkstattdaten bleiben Ihre",
-        signal3Title: "4 Sprachen", signal3Body: "Deutsch, Englisch, Französisch, Spanisch",
-        signal4Title: "Pro einmalig", signal4Body: "Kein Abonnement",
-        essentialsKicker: "Das Wesentliche", essentialsTitle: "Weniger suchen. Mehr drucken.", essentialsBody: "Alles Wichtige ist sofort erreichbar, ohne dass die Inventur zur Aufgabe wird.",
-        feature1Title: "Die richtige Spule finden", feature1Body: "Nach Marke, Material, Farbe, Status oder Restgewicht suchen und filtern.",
-        feature2Title: "Scannen statt tippen", feature2Body: "Bekannte Barcodes füllen gespeicherte Daten vor. Einen neuen Barcode einmal prüfen und speichern – Filary lernt ihn für den nächsten Scan.",
-        feature3Title: "Restmenge kennen", feature3Body: "Aktuelles Gewicht erfassen und verfügbares Filament sofort sehen.",
-        videoKicker: "Filary in Aktion", videoTitle: "Von der neuen Spule zur aufgeräumten Werkstatt.", videoBody: "Ein hochwertiger, leicht verständlicher Rundgang: hinzufügen, scannen, organisieren und wissen, was für den nächsten Druck bereit ist.",
-        videoPoint1: "Echte App-Aufnahmen, keine simulierte Oberfläche", videoPoint2: "Wichtige Aktionen genau richtig verlangsamt", videoPoint3: "Filary auf dem iPhone, auch für iPad entwickelt",
-        scanKicker: "Filary Pro", scanTitle: "Etikett scannen. Tippen sparen.", scanBody: "Richten Sie die Kamera auf das Spulenetikett. Ist der Barcode bereits in Ihrem Katalog gespeichert, füllt Filary Marke, Material, Farbe und Gewicht aus den gespeicherten Daten vor. Ist er neu, prüfen oder ergänzen Sie die Angaben einmal und speichern Sie die Spule. Danach lernt Filary den Barcode und erkennt ihn beim nächsten Scan automatisch.",
-        scan1: "Gespeicherte Daten bekannter Barcodes", scan2: "Neue Barcodes werden beim Speichern gelernt", scan3: "Warnung bei doppelten Barcodes",
-        screensKicker: "Für jeden Bildschirm", screensTitle: "Übersichtlich auf dem iPhone. Großzügig auf dem iPad.", screensBody: "Unterwegs eine klare Liste nutzen oder auf dem großen Bildschirm eine detaillierte Tabelle öffnen.",
-        galleryHint: "Wischen zum Entdecken →",
-        phoneTitle: "Inventar für unterwegs", phoneBody: "Suche und Filter halten die richtige Spule griffbereit.",
-        ipadTitle: "Komplette Übersicht auf dem iPad", ipadBody: "Dashboard und Inventar stehen unverzerrt nebeneinander.",
-        moreKicker: "Mehr als die Grundlagen", moreTitle: "Alles, was du brauchst – nichts im Weg.", moreBody: "Über Suche und Scan hinaus hilft dir Filary, deinen Bestand im Alltag im Blick zu behalten.",
-        cap1Title: "Sprachaktualisierung", cap1Body: "Ändere Mengen freihändig per Sprache in der Tabellenansicht.",
-        cap2Title: "Niedrigbestandswarnungen", cap2Body: "Werde benachrichtigt, bevor ein Filament mitten im Druck ausgeht.",
-        cap3Title: "Home-Screen-Widget", cap3Body: "Sieh deinen Bestand auf einen Blick, ohne die App zu öffnen.",
-        cap4Title: "Listen- und Tabellenansicht", cap4Body: "Unterwegs eine klare Liste, bei Bedarf eine detaillierte Tabelle.",
-        cap5Title: "Verlauf", cap5Body: "Springe zu kürzlich hinzugefügten Spulen zurück.",
-        cap6Title: "Feuchtigkeitshinweis", cap6Body: "Eine einfache Trockenheitsschätzung für jede geöffnete Spule.",
-        workflowKicker: "Bewusst einfach", workflowTitle: "Ein Ablauf in drei Schritten.",
-        step1Title: "Hinzufügen oder scannen", step1Body: "Spule manuell eingeben oder das Etikett mit Filary Pro scannen.",
-        step2Title: "Suchen und filtern", step2Body: "Marke, Material oder Farbe in Sekunden finden.",
-        step3Title: "Bestand aktuell halten", step3Body: "Mengen und Restgewicht nach jedem Druck aktualisieren.",
-        privacyTitle: "Ihr Inventar bleibt Ihres.", privacyBody: "Filary arbeitet zuerst lokal. iCloud-Sync ist optional und Ihre Daten können jederzeit exportiert werden.",
-        privacy1: "Lokal gespeichert", privacy2: "Optionales iCloud", privacy3: "CSV- und JSON-Export",
-        closingKicker: "Filary Pro", closingTitle: "Unbegrenztes Inventar und Barcode-Scan.", closingBody: "Starten Sie mit Essential und schalten Sie unbegrenzte Spulen, unbegrenzte gespeicherte Scans und Sprachbefehle mit einem Kauf frei.", closingButton: "Filary laden",
-        essential1: "Bis zu 10 Spulen", essential2: "10 gespeicherte Barcode- oder Etikettenscans", essential3: "Filter, Warnungen, iCloud und Exporte",
-        proTitle: "Das komplette Werkstatt-Toolkit", proPrice: "5,99 € · einmaliger Kauf", pro1: "Unbegrenzte Spulen", pro2: "Unbegrenzte gespeicherte Scans", pro3: "Sprachbefehle",
-        supportLink: "Support", privacyLink: "Datenschutz"
-      },
-      es: {
-        heroKicker: "Inventario de filamento para iPhone y iPad",
-        heroTitle: "Sepa exactamente qué <span>filamento tiene.</span>",
-        heroBody: "Controle cada bobina por marca, material, color y peso restante. Encuentre el filamento correcto antes de su próxima impresión.",
-        heroPrimary: "Descargar en App Store", heroSecondary: "Descubrir funciones",
-        trust1: "Filtros rápidos", trust2: "Escaneo de códigos", trust3: "Sincronización iCloud opcional",
-        heroBadgeScans: "escaneos guardados incluidos", heroPrice: "5,99 €", heroBadgePrice: "compra Pro única",
-        signal1Title: "iPhone + iPad", signal1Body: "Un inventario en todas partes",
-        signal2Title: "Primero local", signal2Body: "Los datos de su taller siguen siendo suyos",
-        signal3Title: "4 idiomas", signal3Body: "Español, inglés, francés, alemán",
-        signal4Title: "Pro con una compra", signal4Body: "Sin suscripción",
-        essentialsKicker: "Lo esencial", essentialsTitle: "Menos búsquedas. Más impresión.", essentialsBody: "Todo lo importante está a mano, sin convertir el inventario en una tarea pesada.",
-        feature1Title: "Encuentre la bobina correcta", feature1Body: "Busque por marca, material, color, estado o peso restante.",
-        feature2Title: "Escanee en vez de escribir", feature2Body: "Los códigos conocidos completan los datos guardados. Revise y guarde un código nuevo una vez, y Filary lo aprenderá para el próximo escaneo.",
-        feature3Title: "Sepa cuánto queda", feature3Body: "Registre el peso actual y vea el filamento disponible.",
-        videoKicker: "Vea Filary en acción", videoTitle: "De una bobina nueva a un taller ordenado.", videoBody: "Un recorrido cuidado y fácil de seguir: añada, escanee, organice y sepa qué está listo para su próxima impresión.",
-        videoPoint1: "La aplicación real, sin interfaz simulada", videoPoint2: "Las acciones clave se ralentizan lo justo", videoPoint3: "Filary en iPhone, también diseñado para iPad",
-        scanKicker: "Filary Pro", scanTitle: "Escanee la etiqueta. Evite escribir.", scanBody: "Apunte la cámara a la etiqueta. Si el código ya está guardado en su catálogo, Filary completa la marca, el material, el color y el peso almacenados. Si es nuevo, revise o complete la información una vez y guarde la bobina. Filary aprenderá el código y lo reconocerá automáticamente en el próximo escaneo.",
-        scan1: "Datos completados para códigos conocidos", scan2: "Los códigos nuevos se aprenden al guardar", scan3: "Aviso de códigos duplicados",
-        screensKicker: "Diseñado para cada pantalla", screensTitle: "Cómodo en iPhone. Amplio en iPad.", screensBody: "Use una lista clara en movimiento o una tabla detallada cuando tenga más espacio.",
-        galleryHint: "Deslice para explorar →",
-        phoneTitle: "El inventario en su bolsillo", phoneBody: "La búsqueda y los filtros mantienen cada bobina al alcance.",
-        ipadTitle: "Vista completa en iPad", ipadBody: "El panel y el inventario aparecen juntos sin estiramientos ni deformaciones.",
-        moreKicker: "Más que lo básico", moreTitle: "Todo lo que necesitas, sin estorbos.", moreBody: "Más allá de la búsqueda y el escaneo, Filary te ayuda a mantener tu stock al día.",
-        cap1Title: "Actualización por voz", cap1Body: "Cambia cantidades por voz en la vista de tabla, sin usar las manos.",
-        cap2Title: "Alertas de stock bajo", cap2Body: "Recibe un aviso antes de quedarte sin filamento a mitad de impresión.",
-        cap3Title: "Widget en pantalla de inicio", cap3Body: "Consulta tu stock de un vistazo sin abrir la aplicación.",
-        cap4Title: "Vistas de lista y tabla", cap4Body: "Una lista clara en movimiento y una tabla detallada cuando la necesites.",
-        cap5Title: "Historial de añadidos", cap5Body: "Vuelve a las bobinas añadidas recientemente.",
-        cap6Title: "Indicador de humedad", cap6Body: "Una estimación simple del secado de cada bobina abierta.",
-        workflowKicker: "Diseño sencillo", workflowTitle: "Una rutina de tres pasos.",
-        step1Title: "Añada o escanee", step1Body: "Introduzca una bobina o escanee su etiqueta con Filary Pro.",
-        step2Title: "Busque y filtre", step2Body: "Encuentre marca, material o color en segundos.",
-        step3Title: "Mantenga todo al día", step3Body: "Actualice cantidades y peso restante después de cada impresión.",
-        privacyTitle: "Su inventario sigue siendo suyo.", privacyBody: "Filary funciona primero de forma local. iCloud es opcional y puede exportar sus datos cuando quiera.",
-        privacy1: "Datos locales", privacy2: "iCloud opcional", privacy3: "Exportación CSV y JSON",
-        closingKicker: "Filary Pro", closingTitle: "Inventario ilimitado y escaneo de códigos.", closingBody: "Empiece con Essential y desbloquee bobinas y escaneos guardados ilimitados, además de comandos de voz, con una sola compra.", closingButton: "Descargar Filary",
-        essential1: "Hasta 10 bobinas", essential2: "10 escaneos guardados de código o etiqueta", essential3: "Filtros, alertas, iCloud y exportaciones",
-        proTitle: "El kit completo para el taller", proPrice: "5,99 € · compra única", pro1: "Bobinas ilimitadas", pro2: "Escaneos guardados ilimitados", pro3: "Comandos de voz",
-        supportLink: "Soporte", privacyLink: "Privacidad"
-      }
-    };
+  "en": {
+    "heroKicker": "Filament inventory for iPhone & iPad",
+    "heroTitle": "Know exactly what <span>filament you have.</span>",
+    "heroBody": "Track every spool by brand, material, color and remaining weight. Find the right filament before your next print.",
+    "heroPrimary": "Download on the App Store",
+    "heroSecondary": "Explore features",
+    "trust1": "Fast filtering",
+    "trust2": "Barcode scanning",
+    "trust3": "Optional iCloud sync",
+    "heroBadgeScans": "saved scans included",
+    "heroPrice": "€5.99",
+    "heroBadgePrice": "one-time Pro purchase",
+    "signal1Title": "iPhone + iPad",
+    "signal1Body": "One inventory everywhere",
+    "signal2Title": "Local-first",
+    "signal2Body": "Your workshop data stays yours",
+    "signal3Title": "4 languages",
+    "signal3Body": "English, French, German, Spanish",
+    "signal4Title": "One-time Pro",
+    "signal4Body": "No subscription",
+    "essentialsKicker": "The essentials",
+    "essentialsTitle": "Less searching. More printing.",
+    "essentialsBody": "Everything important is close at hand, without turning inventory into a chore.",
+    "feature1Title": "Find the right spool",
+    "feature1Body": "Search and filter by brand, material, color, status or remaining weight.",
+    "feature2Title": "Scan instead of typing",
+    "feature2Body": "Try 10 saved scans for free. Version 1.2.2 adds 365 built-in codes, bringing the catalog to 608 recognized codes.",
+    "feature3Title": "Know what remains",
+    "feature3Body": "Record current weight and see how much filament is still available.",
+    "videoKicker": "See Filary in action",
+    "videoTitle": "From a new spool to a clear workshop.",
+    "videoBody": "Follow the complete flow from the Home screen: add a spool, choose a color, scan Anycubic and Bambu Lab labels, then check your inventory.",
+    "videoPoint1": "Real app footage, no simulated interface",
+    "videoPoint2": "Full recording at 1.25× speed, with the opening preserved",
+    "videoPoint3": "Filary on iPhone, designed for iPad too",
+    "scanKicker": "10 saved scans included",
+    "scanTitle": "Scan the label. Skip the typing.",
+    "scanBody": "In version 1.2.2, 608 built-in codes cover 579 filament variants from 12 brands. Scan a supported label to prefill its details, then check and save. For a new barcode, complete the details once; Filary remembers them for your next scan.",
+    "scan1": "Known barcode details are prefilled",
+    "scan2": "New barcodes are learned when you save",
+    "scan3": "Warns you about duplicate barcodes",
+    "screensKicker": "Built for every screen",
+    "screensTitle": "Comfortable on iPhone. Spacious on iPad.",
+    "screensBody": "Use a focused list on the go or a detailed table when you have more room.",
+    "galleryHint": "Swipe to explore →",
+    "phoneTitle": "Inventory in your pocket",
+    "phoneBody": "Quick search and filters keep the right spool within reach.",
+    "ipadTitle": "A complete view on iPad",
+    "ipadBody": "Dashboard and inventory sit side by side without stretching or distortion.",
+    "moreKicker": "More than the basics",
+    "moreTitle": "Everything you need, nothing in the way.",
+    "moreBody": "Beyond search and scanning, Filary helps you stay on top of your stock day to day.",
+    "cap1Title": "Voice updates",
+    "cap1Body": "Update quantities hands-free by voice in the table view.",
+    "cap2Title": "Low-stock alerts",
+    "cap2Body": "Get notified before a filament runs out mid-print.",
+    "cap3Title": "Home Screen widget",
+    "cap3Body": "See your stock at a glance without opening the app.",
+    "cap4Title": "List and table views",
+    "cap4Body": "A focused list on the go, a detailed table when you need it.",
+    "cap5Title": "Add history",
+    "cap5Body": "Jump back to spools you added recently.",
+    "cap6Title": "Humidity guidance",
+    "cap6Body": "A simple dryness estimate for each opened spool.",
+    "workflowKicker": "Simple by design",
+    "workflowTitle": "A three-step routine.",
+    "step1Title": "Add or scan",
+    "step1Body": "Enter a spool manually or try the 10 included barcode or label scans.",
+    "step2Title": "Find and filter",
+    "step2Body": "Locate the right brand, material or color in seconds.",
+    "step3Title": "Keep it accurate",
+    "step3Body": "Update quantities and remaining weight after each print.",
+    "privacyTitle": "Your inventory stays yours.",
+    "privacyBody": "Filary is local-first. iCloud synchronization is optional, and your inventory can be exported whenever you want.",
+    "privacy1": "Local-first",
+    "privacy2": "Optional iCloud",
+    "privacy3": "CSV & JSON export",
+    "closingKicker": "Filary Pro",
+    "closingTitle": "Unlimited inventory and barcode scanning.",
+    "closingBody": "Start with Essential, then unlock unlimited inventory, unlimited saved scans and voice commands with one purchase.",
+    "closingButton": "Download Filary",
+    "essential1": "Up to 10 spools",
+    "essential2": "10 saved barcode or label scans",
+    "essential3": "Filters, alerts, iCloud and exports",
+    "proTitle": "The complete workshop toolkit",
+    "proPrice": "5.99 € · one-time purchase",
+    "pro1": "Unlimited spools",
+    "pro2": "Unlimited saved scans",
+    "pro3": "Voice commands",
+    "supportLink": "Support",
+    "privacyLink": "Privacy",
+    "catalogKicker": "New in Filary 1.2.2",
+    "releaseStatus": "Version 1.2.2 is awaiting App Store review.",
+    "catalogTitle": "608 codes. Less typing.",
+    "catalogBody": "The built-in catalog identifies the brand, material, color and weight, including whether a spool is included or it is a refill.",
+    "catalogCodes": "recognized codes",
+    "catalogVariants": "filament variants",
+    "catalogBrands": "brands",
+    "catalogAdded": "new codes",
+    "catalogNote": "579 variants are covered by 608 codes: some products have more than one identifier. 597 codes are for 1 kg filaments.",
+    "colorsKicker": "Your color palette",
+    "colorsTitle": "Find your shade. Keep your inventory.",
+    "colorsBody": "Browse documented manufacturer colors, favorites and recently used shades. Filter by color family and check the English reference name.",
+    "colorsNote": "Your existing spools, weights and notes stay intact. No reimport needed."
+  },
+  "fr": {
+    "heroKicker": "Inventaire de filament pour iPhone et iPad",
+    "heroTitle": "Sachez exactement quel <span>filament vous avez.</span>",
+    "heroBody": "Suivez chaque bobine par marque, matière, couleur et poids restant. Trouvez le bon filament avant votre prochaine impression.",
+    "heroPrimary": "Télécharger sur l’App Store",
+    "heroSecondary": "Découvrir les fonctions",
+    "trust1": "Filtres rapides",
+    "trust2": "Scan de code-barres",
+    "trust3": "Synchronisation iCloud optionnelle",
+    "heroBadgeScans": "scans enregistrés inclus",
+    "heroPrice": "5,99 €",
+    "heroBadgePrice": "achat Pro unique",
+    "signal1Title": "iPhone + iPad",
+    "signal1Body": "Un inventaire partout",
+    "signal2Title": "D’abord en local",
+    "signal2Body": "Vos données d’atelier restent à vous",
+    "signal3Title": "4 langues",
+    "signal3Body": "Français, anglais, allemand, espagnol",
+    "signal4Title": "Pro en achat unique",
+    "signal4Body": "Sans abonnement",
+    "essentialsKicker": "L’essentiel",
+    "essentialsTitle": "Moins de recherche. Plus d’impression.",
+    "essentialsBody": "Tout ce qui compte reste à portée de main, sans transformer l’inventaire en corvée.",
+    "feature1Title": "Trouvez la bonne bobine",
+    "feature1Body": "Recherchez par marque, matière, couleur, état ou poids restant.",
+    "feature2Title": "Scannez au lieu de saisir",
+    "feature2Body": "Essayez gratuitement 10 scans enregistrés. La version 1.2.2 ajoute 365 codes au catalogue, pour un total de 608 codes reconnus.",
+    "feature3Title": "Connaissez le poids restant",
+    "feature3Body": "Saisissez le poids actuel et voyez immédiatement le filament disponible.",
+    "videoKicker": "Voyez Filary en action",
+    "videoTitle": "D’une nouvelle bobine à un atelier bien rangé.",
+    "videoBody": "Suivez le parcours complet depuis l’accueil : ajout d’une bobine, choix d’une couleur, scan des étiquettes Anycubic et Bambu Lab, puis consultation de l’inventaire.",
+    "videoPoint1": "L’application réelle, sans interface simulée",
+    "videoPoint2": "Enregistrement complet à vitesse ×1,25, début conservé",
+    "videoPoint3": "Filary sur iPhone, également conçu pour iPad",
+    "scanKicker": "10 scans enregistrés inclus",
+    "scanTitle": "Scannez l’étiquette. Évitez la saisie.",
+    "scanBody": "Dans la version 1.2.2, les 608 codes du catalogue couvrent 579 variantes de filaments de 12 marques. Scannez une étiquette reconnue pour préremplir ses informations, puis vérifiez et enregistrez. Pour un nouveau code, complétez les informations une fois : Filary les mémorise pour le prochain scan.",
+    "scan1": "Préremplissage des codes-barres connus",
+    "scan2": "Apprentissage des nouveaux codes à l’enregistrement",
+    "scan3": "Alerte en cas de code-barres dupliqué",
+    "screensKicker": "Conçu pour chaque écran",
+    "screensTitle": "Pratique sur iPhone. Spacieux sur iPad.",
+    "screensBody": "Utilisez une liste claire en mobilité ou un tableau détaillé lorsque vous avez plus d’espace.",
+    "galleryHint": "Faites défiler pour explorer →",
+    "phoneTitle": "L’inventaire dans votre poche",
+    "phoneBody": "La recherche et les filtres rendent chaque bobine immédiatement accessible.",
+    "ipadTitle": "Une vue complète sur iPad",
+    "ipadBody": "Le tableau de bord et l’inventaire restent côte à côte, sans étirement ni déformation.",
+    "moreKicker": "Plus que l’essentiel",
+    "moreTitle": "Tout ce qu’il faut, rien qui gêne.",
+    "moreBody": "Au-delà de la recherche et du scan, Filary vous aide à garder votre stock à jour au quotidien.",
+    "cap1Title": "Mise à jour vocale",
+    "cap1Body": "Modifiez les quantités à la voix dans la vue tableau, sans les mains.",
+    "cap2Title": "Alertes de stock bas",
+    "cap2Body": "Soyez prévenu avant de tomber en rupture en pleine impression.",
+    "cap3Title": "Widget écran d’accueil",
+    "cap3Body": "Voyez votre stock d’un coup d’œil sans ouvrir l’application.",
+    "cap4Title": "Vues liste et tableau",
+    "cap4Body": "Une liste claire en mobilité, un tableau détaillé au besoin.",
+    "cap5Title": "Historique d’ajout",
+    "cap5Body": "Revenez aux bobines ajoutées récemment.",
+    "cap6Title": "Indice d’humidité",
+    "cap6Body": "Une estimation simple du séchage de chaque bobine ouverte.",
+    "workflowKicker": "Simple par nature",
+    "workflowTitle": "Une routine en trois étapes.",
+    "step1Title": "Ajoutez ou scannez",
+    "step1Body": "Saisissez une bobine ou essayez les 10 scans de code-barres ou d’étiquette inclus.",
+    "step2Title": "Cherchez et filtrez",
+    "step2Body": "Trouvez la bonne marque, matière ou couleur en quelques secondes.",
+    "step3Title": "Gardez un stock précis",
+    "step3Body": "Mettez à jour les quantités et le poids restant après chaque impression.",
+    "privacyTitle": "Votre inventaire reste le vôtre.",
+    "privacyBody": "Filary fonctionne d’abord en local. La synchronisation iCloud est optionnelle et vous pouvez exporter vos données à tout moment.",
+    "privacy1": "Données locales",
+    "privacy2": "iCloud optionnel",
+    "privacy3": "Export CSV et JSON",
+    "closingKicker": "Filary Pro",
+    "closingTitle": "Inventaire illimité et scan de code-barres.",
+    "closingBody": "Commencez avec Essential, puis débloquez les bobines et scans enregistrés illimités ainsi que les commandes vocales en un seul achat.",
+    "closingButton": "Télécharger Filary",
+    "essential1": "Jusqu’à 10 bobines",
+    "essential2": "10 scans de code-barres ou d’étiquette enregistrés",
+    "essential3": "Filtres, alertes, iCloud et exports",
+    "proTitle": "La boîte à outils complète",
+    "proPrice": "5,99 € · achat unique",
+    "pro1": "Bobines illimitées",
+    "pro2": "Scans enregistrés illimités",
+    "pro3": "Commandes vocales",
+    "supportLink": "Assistance",
+    "privacyLink": "Confidentialité",
+    "catalogKicker": "Nouveau dans Filary 1.2.2",
+    "releaseStatus": "La version 1.2.2 est en cours de validation par Apple.",
+    "catalogTitle": "608 codes. Moins de saisie.",
+    "catalogBody": "Le catalogue intégré retrouve la marque, la matière, la couleur et le poids, avec la distinction entre bobine incluse et recharge.",
+    "catalogCodes": "codes reconnus",
+    "catalogVariants": "variantes de filaments",
+    "catalogBrands": "marques",
+    "catalogAdded": "nouveaux codes",
+    "catalogNote": "579 variantes correspondent à 608 codes : certains produits possèdent plusieurs identifiants. 597 codes concernent des filaments de 1 kg.",
+    "colorsKicker": "Votre nuancier",
+    "colorsTitle": "Trouvez votre nuance. Gardez votre inventaire.",
+    "colorsBody": "Retrouvez les couleurs constructeur documentées, vos favoris et les nuances récentes. Filtrez par famille de couleurs et consultez le nom anglais de la référence.",
+    "colorsNote": "Vos bobines, poids et notes existants sont conservés. Aucune réimportation nécessaire."
+  },
+  "de": {
+    "heroKicker": "Filament-Inventar für iPhone und iPad",
+    "heroTitle": "Wissen Sie genau, welches <span>Filament Sie haben.</span>",
+    "heroBody": "Verwalten Sie jede Spule nach Marke, Material, Farbe und Restgewicht. Finden Sie vor dem nächsten Druck das richtige Filament.",
+    "heroPrimary": "Im App Store laden",
+    "heroSecondary": "Funktionen entdecken",
+    "trust1": "Schnelle Filter",
+    "trust2": "Barcode-Scan",
+    "trust3": "Optionaler iCloud-Sync",
+    "heroBadgeScans": "gespeicherte Scans inklusive",
+    "heroPrice": "5,99 €",
+    "heroBadgePrice": "einmaliger Pro-Kauf",
+    "signal1Title": "iPhone + iPad",
+    "signal1Body": "Ein Inventar auf allen Geräten",
+    "signal2Title": "Zuerst lokal",
+    "signal2Body": "Ihre Werkstattdaten bleiben Ihre",
+    "signal3Title": "4 Sprachen",
+    "signal3Body": "Deutsch, Englisch, Französisch, Spanisch",
+    "signal4Title": "Pro einmalig",
+    "signal4Body": "Kein Abonnement",
+    "essentialsKicker": "Das Wesentliche",
+    "essentialsTitle": "Weniger suchen. Mehr drucken.",
+    "essentialsBody": "Alles Wichtige ist sofort erreichbar, ohne dass die Inventur zur Aufgabe wird.",
+    "feature1Title": "Die richtige Spule finden",
+    "feature1Body": "Nach Marke, Material, Farbe, Status oder Restgewicht suchen und filtern.",
+    "feature2Title": "Scannen statt tippen",
+    "feature2Body": "10 gespeicherte Scans kostenlos ausprobieren. Version 1.2.2 ergänzt 365 Codes und erkennt insgesamt 608 Codes.",
+    "feature3Title": "Restmenge kennen",
+    "feature3Body": "Aktuelles Gewicht erfassen und verfügbares Filament sofort sehen.",
+    "videoKicker": "Filary in Aktion",
+    "videoTitle": "Von der neuen Spule zur aufgeräumten Werkstatt.",
+    "videoBody": "Der vollständige Ablauf ab dem Startbildschirm: Spule hinzufügen, Farbe wählen, Etiketten von Anycubic und Bambu Lab scannen und das Inventar prüfen.",
+    "videoPoint1": "Echte App-Aufnahmen, keine simulierte Oberfläche",
+    "videoPoint2": "Vollständige Aufnahme mit 1,25-facher Geschwindigkeit, inklusive Anfang",
+    "videoPoint3": "Filary auf dem iPhone, auch für iPad entwickelt",
+    "scanKicker": "10 gespeicherte Scans inklusive",
+    "scanTitle": "Etikett scannen. Tippen sparen.",
+    "scanBody": "In Version 1.2.2 decken 608 integrierte Codes 579 Filamentvarianten von 12 Marken ab. Ein bekanntes Etikett scannen, die vorausgefüllten Angaben prüfen und speichern. Neue Codes einmal ergänzen: Filary merkt sich die Daten für den nächsten Scan.",
+    "scan1": "Gespeicherte Daten bekannter Barcodes",
+    "scan2": "Neue Barcodes werden beim Speichern gelernt",
+    "scan3": "Warnung bei doppelten Barcodes",
+    "screensKicker": "Für jeden Bildschirm",
+    "screensTitle": "Übersichtlich auf dem iPhone. Großzügig auf dem iPad.",
+    "screensBody": "Unterwegs eine klare Liste nutzen oder auf dem großen Bildschirm eine detaillierte Tabelle öffnen.",
+    "galleryHint": "Wischen zum Entdecken →",
+    "phoneTitle": "Inventar für unterwegs",
+    "phoneBody": "Suche und Filter halten die richtige Spule griffbereit.",
+    "ipadTitle": "Komplette Übersicht auf dem iPad",
+    "ipadBody": "Dashboard und Inventar stehen unverzerrt nebeneinander.",
+    "moreKicker": "Mehr als die Grundlagen",
+    "moreTitle": "Alles, was du brauchst – nichts im Weg.",
+    "moreBody": "Über Suche und Scan hinaus hilft dir Filary, deinen Bestand im Alltag im Blick zu behalten.",
+    "cap1Title": "Sprachaktualisierung",
+    "cap1Body": "Ändere Mengen freihändig per Sprache in der Tabellenansicht.",
+    "cap2Title": "Niedrigbestandswarnungen",
+    "cap2Body": "Werde benachrichtigt, bevor ein Filament mitten im Druck ausgeht.",
+    "cap3Title": "Home-Screen-Widget",
+    "cap3Body": "Sieh deinen Bestand auf einen Blick, ohne die App zu öffnen.",
+    "cap4Title": "Listen- und Tabellenansicht",
+    "cap4Body": "Unterwegs eine klare Liste, bei Bedarf eine detaillierte Tabelle.",
+    "cap5Title": "Verlauf",
+    "cap5Body": "Springe zu kürzlich hinzugefügten Spulen zurück.",
+    "cap6Title": "Feuchtigkeitshinweis",
+    "cap6Body": "Eine einfache Trockenheitsschätzung für jede geöffnete Spule.",
+    "workflowKicker": "Bewusst einfach",
+    "workflowTitle": "Ein Ablauf in drei Schritten.",
+    "step1Title": "Hinzufügen oder scannen",
+    "step1Body": "Spule manuell eingeben oder die 10 enthaltenen Barcode- oder Etikettenscans ausprobieren.",
+    "step2Title": "Suchen und filtern",
+    "step2Body": "Marke, Material oder Farbe in Sekunden finden.",
+    "step3Title": "Bestand aktuell halten",
+    "step3Body": "Mengen und Restgewicht nach jedem Druck aktualisieren.",
+    "privacyTitle": "Ihr Inventar bleibt Ihres.",
+    "privacyBody": "Filary arbeitet zuerst lokal. iCloud-Sync ist optional und Ihre Daten können jederzeit exportiert werden.",
+    "privacy1": "Lokal gespeichert",
+    "privacy2": "Optionales iCloud",
+    "privacy3": "CSV- und JSON-Export",
+    "closingKicker": "Filary Pro",
+    "closingTitle": "Unbegrenztes Inventar und Barcode-Scan.",
+    "closingBody": "Starten Sie mit Essential und schalten Sie unbegrenzte Spulen, unbegrenzte gespeicherte Scans und Sprachbefehle mit einem Kauf frei.",
+    "closingButton": "Filary laden",
+    "essential1": "Bis zu 10 Spulen",
+    "essential2": "10 gespeicherte Barcode- oder Etikettenscans",
+    "essential3": "Filter, Warnungen, iCloud und Exporte",
+    "proTitle": "Das komplette Werkstatt-Toolkit",
+    "proPrice": "5,99 € · einmaliger Kauf",
+    "pro1": "Unbegrenzte Spulen",
+    "pro2": "Unbegrenzte gespeicherte Scans",
+    "pro3": "Sprachbefehle",
+    "supportLink": "Support",
+    "privacyLink": "Datenschutz",
+    "catalogKicker": "Neu in Filary 1.2.2",
+    "releaseStatus": "Version 1.2.2 wartet auf die App-Store-Prüfung.",
+    "catalogTitle": "608 Codes. Weniger tippen.",
+    "catalogBody": "Der integrierte Katalog erkennt Marke, Material, Farbe und Gewicht und unterscheidet zwischen Filament mit Spule und Nachfüllung.",
+    "catalogCodes": "erkannte Codes",
+    "catalogVariants": "Filamentvarianten",
+    "catalogBrands": "Marken",
+    "catalogAdded": "neue Codes",
+    "catalogNote": "608 Codes decken 579 Varianten ab: Manche Produkte haben mehrere Kennungen. 597 Codes gehören zu Filamenten mit 1 kg.",
+    "colorsKicker": "Ihre Farbpalette",
+    "colorsTitle": "Farbton finden. Inventar behalten.",
+    "colorsBody": "Entdecken Sie dokumentierte Herstellerfarben, Favoriten und zuletzt verwendete Farbtöne. Filtern Sie nach Farbfamilie und sehen Sie den englischen Referenznamen.",
+    "colorsNote": "Vorhandene Spulen, Gewichte und Notizen bleiben erhalten. Kein erneuter Import nötig."
+  },
+  "es": {
+    "heroKicker": "Inventario de filamento para iPhone y iPad",
+    "heroTitle": "Sepa exactamente qué <span>filamento tiene.</span>",
+    "heroBody": "Controle cada bobina por marca, material, color y peso restante. Encuentre el filamento correcto antes de su próxima impresión.",
+    "heroPrimary": "Descargar en App Store",
+    "heroSecondary": "Descubrir funciones",
+    "trust1": "Filtros rápidos",
+    "trust2": "Escaneo de códigos",
+    "trust3": "Sincronización iCloud opcional",
+    "heroBadgeScans": "escaneos guardados incluidos",
+    "heroPrice": "5,99 €",
+    "heroBadgePrice": "compra Pro única",
+    "signal1Title": "iPhone + iPad",
+    "signal1Body": "Un inventario en todas partes",
+    "signal2Title": "Primero local",
+    "signal2Body": "Los datos de su taller siguen siendo suyos",
+    "signal3Title": "4 idiomas",
+    "signal3Body": "Español, inglés, francés, alemán",
+    "signal4Title": "Pro con una compra",
+    "signal4Body": "Sin suscripción",
+    "essentialsKicker": "Lo esencial",
+    "essentialsTitle": "Menos búsquedas. Más impresión.",
+    "essentialsBody": "Todo lo importante está a mano, sin convertir el inventario en una tarea pesada.",
+    "feature1Title": "Encuentre la bobina correcta",
+    "feature1Body": "Busque por marca, material, color, estado o peso restante.",
+    "feature2Title": "Escanee en vez de escribir",
+    "feature2Body": "Pruebe gratis 10 escaneos guardados. La versión 1.2.2 añade 365 códigos, hasta un total de 608 códigos reconocidos.",
+    "feature3Title": "Sepa cuánto queda",
+    "feature3Body": "Registre el peso actual y vea el filamento disponible.",
+    "videoKicker": "Vea Filary en acción",
+    "videoTitle": "De una bobina nueva a un taller ordenado.",
+    "videoBody": "El recorrido completo desde Inicio: añadir una bobina, elegir un color, escanear etiquetas de Anycubic y Bambu Lab y consultar el inventario.",
+    "videoPoint1": "La aplicación real, sin interfaz simulada",
+    "videoPoint2": "Grabación completa a velocidad ×1,25, con el inicio conservado",
+    "videoPoint3": "Filary en iPhone, también diseñado para iPad",
+    "scanKicker": "10 escaneos guardados incluidos",
+    "scanTitle": "Escanee la etiqueta. Evite escribir.",
+    "scanBody": "En la versión 1.2.2, los 608 códigos integrados cubren 579 variantes de filamento de 12 marcas. Escanee una etiqueta reconocida, revise los datos completados y guarde. Para un código nuevo, complete los datos una vez: Filary los recordará para el próximo escaneo.",
+    "scan1": "Datos completados para códigos conocidos",
+    "scan2": "Los códigos nuevos se aprenden al guardar",
+    "scan3": "Aviso de códigos duplicados",
+    "screensKicker": "Diseñado para cada pantalla",
+    "screensTitle": "Cómodo en iPhone. Amplio en iPad.",
+    "screensBody": "Use una lista clara en movimiento o una tabla detallada cuando tenga más espacio.",
+    "galleryHint": "Deslice para explorar →",
+    "phoneTitle": "El inventario en su bolsillo",
+    "phoneBody": "La búsqueda y los filtros mantienen cada bobina al alcance.",
+    "ipadTitle": "Vista completa en iPad",
+    "ipadBody": "El panel y el inventario aparecen juntos sin estiramientos ni deformaciones.",
+    "moreKicker": "Más que lo básico",
+    "moreTitle": "Todo lo que necesitas, sin estorbos.",
+    "moreBody": "Más allá de la búsqueda y el escaneo, Filary te ayuda a mantener tu stock al día.",
+    "cap1Title": "Actualización por voz",
+    "cap1Body": "Cambia cantidades por voz en la vista de tabla, sin usar las manos.",
+    "cap2Title": "Alertas de stock bajo",
+    "cap2Body": "Recibe un aviso antes de quedarte sin filamento a mitad de impresión.",
+    "cap3Title": "Widget en pantalla de inicio",
+    "cap3Body": "Consulta tu stock de un vistazo sin abrir la aplicación.",
+    "cap4Title": "Vistas de lista y tabla",
+    "cap4Body": "Una lista clara en movimiento y una tabla detallada cuando la necesites.",
+    "cap5Title": "Historial de añadidos",
+    "cap5Body": "Vuelve a las bobinas añadidas recientemente.",
+    "cap6Title": "Indicador de humedad",
+    "cap6Body": "Una estimación simple del secado de cada bobina abierta.",
+    "workflowKicker": "Diseño sencillo",
+    "workflowTitle": "Una rutina de tres pasos.",
+    "step1Title": "Añada o escanee",
+    "step1Body": "Introduzca una bobina manualmente o pruebe los 10 escaneos de código o etiqueta incluidos.",
+    "step2Title": "Busque y filtre",
+    "step2Body": "Encuentre marca, material o color en segundos.",
+    "step3Title": "Mantenga todo al día",
+    "step3Body": "Actualice cantidades y peso restante después de cada impresión.",
+    "privacyTitle": "Su inventario sigue siendo suyo.",
+    "privacyBody": "Filary funciona primero de forma local. iCloud es opcional y puede exportar sus datos cuando quiera.",
+    "privacy1": "Datos locales",
+    "privacy2": "iCloud opcional",
+    "privacy3": "Exportación CSV y JSON",
+    "closingKicker": "Filary Pro",
+    "closingTitle": "Inventario ilimitado y escaneo de códigos.",
+    "closingBody": "Empiece con Essential y desbloquee bobinas y escaneos guardados ilimitados, además de comandos de voz, con una sola compra.",
+    "closingButton": "Descargar Filary",
+    "essential1": "Hasta 10 bobinas",
+    "essential2": "10 escaneos guardados de código o etiqueta",
+    "essential3": "Filtros, alertas, iCloud y exportaciones",
+    "proTitle": "El kit completo para el taller",
+    "proPrice": "5,99 € · compra única",
+    "pro1": "Bobinas ilimitadas",
+    "pro2": "Escaneos guardados ilimitados",
+    "pro3": "Comandos de voz",
+    "supportLink": "Soporte",
+    "privacyLink": "Privacidad",
+    "catalogKicker": "Novedades de Filary 1.2.2",
+    "releaseStatus": "La versión 1.2.2 está pendiente de revisión en el App Store.",
+    "catalogTitle": "608 códigos. Menos escritura.",
+    "catalogBody": "El catálogo integrado identifica marca, material, color y peso, y distingue entre filamento con bobina y recarga.",
+    "catalogCodes": "códigos reconocidos",
+    "catalogVariants": "variantes de filamento",
+    "catalogBrands": "marcas",
+    "catalogAdded": "códigos nuevos",
+    "catalogNote": "608 códigos cubren 579 variantes: algunos productos tienen varios identificadores. 597 códigos corresponden a filamentos de 1 kg.",
+    "colorsKicker": "Su paleta de colores",
+    "colorsTitle": "Encuentre su tono. Conserve su inventario.",
+    "colorsBody": "Explore colores documentados del fabricante, favoritos y tonos recientes. Filtre por familia de colores y consulte el nombre de referencia en inglés.",
+    "colorsNote": "Sus bobinas, pesos y notas existentes se conservan. No hace falta volver a importar."
+  }
+};
 
     const picker = document.getElementById("language");
     function applyLanguage(language) {
@@ -908,7 +1208,7 @@
         if (value) element.innerHTML = value;
       });
       document.querySelectorAll("[data-localized-src]").forEach((image) => {
-        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=4`;
+        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=122`;
       });
       picker.value = lang;
       try { localStorage.setItem("spool-mate-language", lang); } catch (_) {}
