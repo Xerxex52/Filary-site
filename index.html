@@ -314,9 +314,8 @@
       width: 100%;
       height: auto;
     }
-    /* Match the displayed height of a 255 px-wide iPhone capture.
-       Landscape iPads therefore need more width, not a smaller visual scale. */
-    .shot-card-ipad { flex-basis: 739px; }
+    /* Keep portrait iPad captures as tall as the iPhone captures on desktop. */
+    .shot-card-ipad { flex-basis: 416px; }
     /* Never force a crop on iPad captures: their exported height can differ by
        a pixel from 4:3, and `cover` used to shave the bottom edge off. */
     .shot-card-ipad img {
@@ -423,9 +422,8 @@
       .gallery-head { align-items: start; flex-direction: column; margin-bottom: 30px; }
       .shot-rail { padding-inline: 18px; }
       .shot-card { flex-basis: min(72vw,280px); }
-      /* iPhone cards are min(72vw, 280px) wide. Multiplying by both source
-         aspect ratios gives an iPad card with the exact same displayed height. */
-      .shot-card-ipad { flex-basis: min(208.5vw,811px); }
+      /* Fit the entire iPad capture within a narrow screen. */
+      .shot-card-ipad { flex-basis: min(86vw,416px); }
       .feature-card { min-height: 0; padding: 26px; }
       .feature-mark { margin-bottom: 24px; }
       .spotlight { gap: 42px; }
@@ -503,9 +501,9 @@
           </ul>
         </div>
         <div class="hero-device">
-          <img class="hero-peek hero-peek-left" data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="" aria-hidden="true" width="660" height="1434">
-          <img class="phone-shot" data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=122" alt="Filary inventory dashboard on iPhone" width="660" height="1434" fetchpriority="high">
-          <img class="hero-peek hero-peek-right" data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="" aria-hidden="true" width="660" height="1434">
+          <img class="hero-peek hero-peek-left" data-localized-src="screenshots/{lang}/iphone/04-scan.webp" src="assets/screenshots/en/iphone/04-scan.webp?v=122-screens" alt="" aria-hidden="true" width="792" height="1721">
+          <img class="phone-shot" data-localized-src="screenshots/{lang}/iphone/01-home.webp" src="assets/screenshots/en/iphone/01-home.webp?v=122-screens" alt="Filary inventory dashboard on iPhone" width="792" height="1721" fetchpriority="high">
+          <img class="hero-peek hero-peek-right" data-localized-src="screenshots/{lang}/iphone/05-colors.webp" src="assets/screenshots/en/iphone/05-colors.webp?v=122-screens" alt="" aria-hidden="true" width="792" height="1721">
           <div class="hero-badge hero-badge-top"><strong>10</strong> <span data-i18n="heroBadgeScans">saved scans included</span></div>
           <div class="hero-badge hero-badge-bottom"><strong data-i18n="heroPrice">€5.99</strong> <span data-i18n="heroBadgePrice">one-time Pro purchase</span></div>
         </div>
@@ -599,7 +597,7 @@
             <li data-i18n="scan3">Warns you about duplicate barcodes</li>
           </ul>
         </div>
-        <img class="scan-shot" data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="Barcode scanning in Filary" width="660" height="1434" loading="lazy">
+        <img class="scan-shot" data-localized-src="screenshots/{lang}/iphone/04-scan.webp" src="assets/screenshots/en/iphone/04-scan.webp?v=122-screens" alt="Barcode scanning in Filary" width="792" height="1721" loading="lazy">
       </div>
     </section>
 
@@ -611,7 +609,7 @@
           <p data-i18n="colorsBody">Browse documented manufacturer colors, favorites and recently used shades. Filter by color family and check the English reference name.</p>
           <p class="catalog-note" data-i18n="colorsNote">Your existing spools, weights and notes stay intact. No reimport needed.</p>
         </div>
-        <img class="scan-shot" data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="Filary color palette, favorites and recent shades" width="660" height="1434" loading="lazy">
+        <img class="scan-shot" data-localized-src="screenshots/{lang}/iphone/05-colors.webp" src="assets/screenshots/en/iphone/05-colors.webp?v=122-screens" alt="Filary color palette, favorites and recent shades" width="792" height="1721" loading="lazy">
       </div>
     </section>
 
@@ -627,16 +625,15 @@
         </div>
       </div>
       <div class="shot-rail" aria-label="Filary screenshots">
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-01.webp" src="assets/showcase/en/iphone-01.webp?v=122" alt="Filary stock overview" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-02.webp" src="assets/showcase/en/iphone-02.webp?v=122" alt="608 recognized codes in Filary" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-03.webp" src="assets/showcase/en/iphone-03.webp?v=122" alt="Filary color palette" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-04.webp" src="assets/showcase/en/iphone-04.webp?v=122" alt="Filary inventory colors" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-05.webp" src="assets/showcase/en/iphone-05.webp?v=122" alt="Filary low-stock alerts" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/iphone-06.webp" src="assets/showcase/en/iphone-06.webp?v=122" alt="Filary Essential and Pro" width="660" height="1434" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-01.webp" src="assets/showcase/en/ipad-01.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-02.webp" src="assets/showcase/en/ipad-02.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-03.webp" src="assets/showcase/en/ipad-03.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
-        <figure class="shot-card"><img data-localized-src="showcase/{lang}/ipad-04.webp" src="assets/showcase/en/ipad-04.webp?v=122" alt="Filary on iPad" width="660" height="880" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="screenshots/{lang}/iphone/01-home.webp" src="assets/screenshots/en/iphone/01-home.webp?v=122-screens" alt="Filary stock overview" width="792" height="1721" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="screenshots/{lang}/iphone/04-scan.webp" src="assets/screenshots/en/iphone/04-scan.webp?v=122-screens" alt="Filament identified by barcode in Filary" width="792" height="1721" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="screenshots/{lang}/iphone/05-colors.webp" src="assets/screenshots/en/iphone/05-colors.webp?v=122-screens" alt="Filary color palette" width="792" height="1721" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="screenshots/{lang}/iphone/02-inventory.webp" src="assets/screenshots/en/iphone/02-inventory.webp?v=122-screens" alt="Filary inventory colors" width="792" height="1721" loading="lazy"></figure>
+        <figure class="shot-card"><img data-localized-src="screenshots/{lang}/iphone/03-alerts.webp" src="assets/screenshots/en/iphone/03-alerts.webp?v=122-screens" alt="Filary low-stock alerts" width="792" height="1721" loading="lazy"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="screenshots/{lang}/ipad/01-workshop.webp" src="assets/screenshots/en/ipad/01-workshop.webp?v=122-screens" alt="Filary on iPad" width="990" height="1320" loading="lazy"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="screenshots/{lang}/ipad/02-scan.webp" src="assets/screenshots/en/ipad/02-scan.webp?v=122-screens" alt="Filary on iPad" width="990" height="1320" loading="lazy"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="screenshots/{lang}/ipad/04-colors.webp" src="assets/screenshots/en/ipad/04-colors.webp?v=122-screens" alt="Filary on iPad" width="990" height="1320" loading="lazy"></figure>
+        <figure class="shot-card shot-card-ipad"><img data-localized-src="screenshots/{lang}/ipad/03-settings.webp" src="assets/screenshots/en/ipad/03-settings.webp?v=122-screens" alt="Filary on iPad" width="990" height="1320" loading="lazy"></figure>
       </div>
     </section>
 
@@ -1208,7 +1205,7 @@
         if (value) element.innerHTML = value;
       });
       document.querySelectorAll("[data-localized-src]").forEach((image) => {
-        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=122`;
+        image.src = `assets/${image.dataset.localizedSrc.replace("{lang}", lang)}?v=122-screens`;
       });
       picker.value = lang;
       try { localStorage.setItem("spool-mate-language", lang); } catch (_) {}
